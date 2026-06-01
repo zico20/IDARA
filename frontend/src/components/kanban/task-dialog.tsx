@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { FieldError, Input, Label, Textarea } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
+import { DateField } from "@/components/ui/date-field";
 import { cn } from "@/lib/utils";
 import { useT } from "@/lib/i18n";
 import type { Label as LabelType, Priority, Task } from "@/lib/types";
@@ -202,12 +203,7 @@ export function TaskDialog({
 
             <div>
               <Label htmlFor="due_date">{t("task.dueDate")}</Label>
-              <Input
-                id="due_date"
-                type="date"
-                className="mt-1"
-                {...register("due_date")}
-              />
+              <DateField id="due_date" {...register("due_date")} />
             </div>
 
             <div>
