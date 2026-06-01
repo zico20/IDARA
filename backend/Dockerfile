@@ -1,4 +1,4 @@
-# --- TaskFlow backend (FastAPI) ---
+# --- IDARA backend (FastAPI) ---
 FROM python:3.11-slim AS base
 
 ENV PYTHONUNBUFFERED=1 \

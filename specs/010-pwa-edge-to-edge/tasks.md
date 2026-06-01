@@ -63,16 +63,16 @@ Next.js App Router frontend: `frontend/src/app/...`, `frontend/src/components/..
 
 ## Phase 4: User Story 2 - Installability (Priority: P2)
 
-**Goal**: TaskFlow is installable, launches standalone with the correct name/icon and brand background, no manifest/icon errors.
+**Goal**: IDARA is installable, launches standalone with the correct name/icon and brand background, no manifest/icon errors.
 
 **Independent Test**: Build for production; install from a supported browser; launch standalone with correct icon/name/background; PWA audit shows no manifest/icon errors.
 
 ### Implementation for User Story 2
 
-- [X] T008 [P] [US2] Create `frontend/src/app/manifest.ts` exporting a `MetadataRoute.Manifest`: name/short_name "TaskFlow", `start_url: "/boards"`, `display: "standalone"`, `background_color`/`theme_color` = dark `#0D1117` (from `lib/pwa/colors.ts`), and an `icons` array (192, 512, 512-maskable, apple).
+- [X] T008 [P] [US2] Create `frontend/src/app/manifest.ts` exporting a `MetadataRoute.Manifest`: name/short_name "IDARA", `start_url: "/boards"`, `display: "standalone"`, `background_color`/`theme_color` = dark `#0D1117` (from `lib/pwa/colors.ts`), and an `icons` array (192, 512, 512-maskable, apple).
 - [X] T009 [P] [US2] App icon. (Implemented as a static `frontend/public/icon.svg` brand grid mark instead of `ImageResponse` — `@vercel/og` failed to prerender under `output: standalone` with a font-URL error; a scalable SVG is dependency-free, build-safe, and serves as both `any` and `maskable`.)
 - [X] T010 [P] [US2] Apple touch icon. (Covered by the same `public/icon.svg` via `metadata.icons.apple` — no separate `ImageResponse` route, for the same build-safety reason as T009.)
-- [X] T011 [US2] In `frontend/src/app/layout.tsx`, add the Apple PWA meta (via `metadata.appleWebApp` + `metadata.icons`) via the metadata API / `<head>`: `apple-mobile-web-app-capable: yes`, `apple-mobile-web-app-status-bar-style: black-translucent`, `apple-mobile-web-app-title: TaskFlow`, and the apple-touch-icon link. (Manifest auto-links via Next.)
+- [X] T011 [US2] In `frontend/src/app/layout.tsx`, add the Apple PWA meta (via `metadata.appleWebApp` + `metadata.icons`) via the metadata API / `<head>`: `apple-mobile-web-app-capable: yes`, `apple-mobile-web-app-status-bar-style: black-translucent`, `apple-mobile-web-app-title: IDARA`, and the apple-touch-icon link. (Manifest auto-links via Next.)
 
 **Checkpoint**: US1 + US2 — installable PWA with correct identity, status bar still blends.
 
@@ -91,7 +91,7 @@ Next.js App Router frontend: `frontend/src/app/...`, `frontend/src/components/..
 ### Implementation for User Story 3
 
 - [X] T013 [P] [US3] Create the pure helper `frontend/src/lib/pwa/sw-register.ts`: `canRegisterServiceWorker(env, nav)` and `shouldReloadOnControllerChange(state)` — framework-free, SSR-safe (`typeof window === "undefined"` → false).
-- [X] T014 [US3] Create `frontend/public/sw.js`: versioned cache `taskflow-shell-v1`; `install` precaches `/offline` + app-shell + static essentials and `skipWaiting()`; `activate` deletes old `taskflow-shell-v*` and `clients.claim()`; `fetch` = network-first for navigations (fallback cached shell → `/offline`), cache-first for `/_next/static/*` + icons/fonts, and pass-through (never cache) for `/api/*`, non-GET, and cross-origin.
+- [X] T014 [US3] Create `frontend/public/sw.js`: versioned cache `idara-shell-v1`; `install` precaches `/offline` + app-shell + static essentials and `skipWaiting()`; `activate` deletes old `idara-shell-v*` and `clients.claim()`; `fetch` = network-first for navigations (fallback cached shell → `/offline`), cache-first for `/_next/static/*` + icons/fonts, and pass-through (never cache) for `/api/*`, non-GET, and cross-origin.
 - [X] T015 [US3] Create `frontend/src/components/pwa/service-worker-registrar.tsx` (client): on mount, if `canRegisterServiceWorker`, `navigator.serviceWorker.register("/sw.js")`; on `controllerchange` (per `shouldReloadOnControllerChange`) reload once. Mount it in `frontend/src/app/layout.tsx`.
 - [X] T016 [P] [US3] Create `frontend/src/app/offline/page.tsx`: bilingual offline screen reusing `EmptyState` + glass, with a retry/back action; `role="alert"` on the message; RTL/theme-safe.
 - [X] T017 [P] [US3] Create `frontend/src/app/error.tsx` (`"use client"`): route error boundary using `EmptyState` + glass, bilingual, `reset()` retry, `role="alert"`.

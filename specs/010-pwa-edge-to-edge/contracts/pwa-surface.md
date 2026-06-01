@@ -6,8 +6,8 @@ There is **no HTTP API** in this feature. The "contracts" are the static PWA sur
 
 ```jsonc
 {
-  "name": "TaskFlow",
-  "short_name": "TaskFlow",
+  "name": "IDARA",
+  "short_name": "IDARA",
   "start_url": "/boards",
   "display": "standalone",
   "background_color": "#0D1117",
@@ -30,7 +30,7 @@ There is **no HTTP API** in this feature. The "contracts" are the static PWA sur
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#EAEEF4">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="TaskFlow">
+<meta name="apple-mobile-web-app-title" content="IDARA">
 <link rel="apple-touch-icon" href="/apple-icon">
 ```
 
@@ -44,7 +44,7 @@ There is **no HTTP API** in this feature. The "contracts" are the static PWA sur
 
 Lifecycle:
 - `install` → precache `["/offline", app shell, static essentials]`, `skipWaiting()`.
-- `activate` → delete caches whose name ≠ current `taskflow-shell-v{N}`, `clients.claim()`.
+- `activate` → delete caches whose name ≠ current `idara-shell-v{N}`, `clients.claim()`.
 - Cache version constant bumped each release → old shell superseded.
 
 **Guarantees (security/consistency):**

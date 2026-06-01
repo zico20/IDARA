@@ -28,7 +28,7 @@ Where the chosen `locale` lives across reloads and visits.
 
 | Store | Key | Authority | Purpose |
 |-------|-----|-----------|---------|
-| Cookie | `taskflow-locale` | **Source of truth** for first server paint | Lets the Server Component render correct `<html lang dir>` with no flash |
+| Cookie | `idara-locale` | **Source of truth** for first server paint | Lets the Server Component render correct `<html lang dir>` with no flash |
 | Zustand (`ui-store`) | `locale` | Reactive client mirror | Ergonomic `useLocale()` reads + re-render on change |
 
 **Rules**:
@@ -80,7 +80,7 @@ Activity-feed sentences are **rebuilt on the client** from existing data, not st
 ```text
 Locale (ar|en) ──derives──> dir (rtl|ltr) ──sets──> <html dir lang>
    │
-   ├── persisted in ──> Cookie (taskflow-locale)  [SSR source of truth]
+   ├── persisted in ──> Cookie (idara-locale)  [SSR source of truth]
    └── mirrored in  ──> Zustand ui-store.locale    [client reactive]
 
 Translatable string set ──keyed by──> typed key union

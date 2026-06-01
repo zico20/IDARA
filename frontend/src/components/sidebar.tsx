@@ -53,7 +53,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         <span className="flex h-[30px] w-[30px] items-center justify-center rounded-[9px] bg-gradient-to-br from-accent to-accent-subtle text-bg shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
           <LayoutGrid size={16} />
         </span>
-        <span className="text-[15px] font-bold tracking-tight">TaskFlow</span>
+        <span className="text-[17px] font-bold tracking-tight">{t("common.appName")}</span>
       </Link>
 
       {/* All boards */}

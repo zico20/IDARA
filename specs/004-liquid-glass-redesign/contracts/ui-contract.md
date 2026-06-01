@@ -48,7 +48,7 @@ cards, inputs/textareas/selects) stay **solid** for readability.
 
 ## 4. Theme mechanism
 
-- **Storage**: `localStorage["taskflow-theme"]` = `"dark"` | `"light"`; default `dark`.
+- **Storage**: `localStorage["idara-theme"]` = `"dark"` | `"light"`; default `dark`.
 - **Application**: `light`/`dark` class on `<html>`. No-flash inline `<script>` in
   `app/layout.tsx` applies the stored value before first paint.
 - **Toggle**: `ThemeSwitcher` component (top bar + auth screens) flips the class and

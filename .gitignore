@@ -8,7 +8,8 @@ __pycache__/
 htmlcov/
 *.db
 *.sqlite3
-backend/taskflow.db
+backend/idara.db
+backend/idara_dev.db
 
 # --- Node / frontend ---
 node_modules/

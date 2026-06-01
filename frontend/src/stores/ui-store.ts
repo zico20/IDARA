@@ -14,7 +14,7 @@ import {
  * Client-only UI state (NOT server data — that lives in TanStack Query).
  * `activityPanelOpen` is persisted to localStorage. `locale` is intentionally
  * NOT persisted here: the authoritative store for first paint is the
- * `taskflow-locale` cookie (read server-side), and the client is seeded from the
+ * `idara-locale` cookie (read server-side), and the client is seeded from the
  * server value. setLocale writes the cookie and flips <html> synchronously.
  */
 interface UiState {
@@ -61,7 +61,7 @@ export const useUiStore = create<UiState>()(
       },
     }),
     {
-      name: "taskflow-ui",
+      name: "idara-ui",
       // Only persist UI prefs to localStorage — NOT locale (cookie owns that).
       partialize: (s) => ({ activityPanelOpen: s.activityPanelOpen }),
     },

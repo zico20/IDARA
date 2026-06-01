@@ -12,7 +12,7 @@ and merge it into the project, cleanly."
 
 ## Overview
 
-A reorganization of TaskFlow's **navigation and layout** (prepared in `NewDesign1/`,
+A reorganization of IDARA's **navigation and layout** (prepared in `NewDesign1/`,
 the "Layout v2" pass). The same features, data, actions, and Liquid Glass styling are
 kept — only **where things sit on screen** changes:
 

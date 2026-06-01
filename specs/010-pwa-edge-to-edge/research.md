@@ -23,7 +23,7 @@ All items resolved from the codebase + platform constraints (no open NEEDS CLARI
 
 ## 4. Web app manifest — Next native, no next-pwa
 
-- **Decision**: Add `app/manifest.ts` exporting a `MetadataRoute.Manifest`: `name`="TaskFlow", `short_name`="TaskFlow", `start_url`="/boards" (the app home; falls through to /login when unauthenticated), `display`="standalone", `background_color`/`theme_color`=`#0D1117` (dark baseline), `dir`/`lang` left default (the app is bilingual and sets dir at runtime), and an `icons` array referencing the generated icons incl. a `512` `maskable` entry.
+- **Decision**: Add `app/manifest.ts` exporting a `MetadataRoute.Manifest`: `name`="IDARA", `short_name`="IDARA", `start_url`="/boards" (the app home; falls through to /login when unauthenticated), `display`="standalone", `background_color`/`theme_color`=`#0D1117` (dark baseline), `dir`/`lang` left default (the app is bilingual and sets dir at runtime), and an `icons` array referencing the generated icons incl. a `512` `maskable` entry.
 - **Rationale**: Next 14 serves `app/manifest.ts` at `/manifest.webmanifest` and auto-links it — no dependency, no public file to hand-maintain. `start_url=/boards` lands an installed user in the app; the existing auth guard redirects to /login if needed.
 - **Alternatives considered**: `next-pwa` — rejected (YAGNI + heavy + opinionated SW). A static `public/manifest.json` — rejected: `manifest.ts` is type-checked and co-located.
 
@@ -39,7 +39,7 @@ All items resolved from the codebase + platform constraints (no open NEEDS CLARI
   - `install`: precache the app shell essentials + `/offline` + build static assets; `self.skipWaiting()`.
   - `activate`: delete old caches by version key; `clients.claim()`.
   - `fetch`: only handle GET. **Navigations** → network-first, fall back to the cached shell / `/offline` when the network fails. **Static assets** (`/_next/static/*`, icons, fonts) → cache-first. **Everything else, especially `/api/*` and cross-origin** → pass through to the network (never cached).
-  - Versioned cache name (e.g. `taskflow-shell-v{N}`) bumped on each deploy so a new version supersedes the old; the client registrar reloads once the new SW takes control.
+  - Versioned cache name (e.g. `idara-shell-v{N}`) bumped on each deploy so a new version supersedes the old; the client registrar reloads once the new SW takes control.
 - **Rationale**: Meets FR-010/011/012/013 with the minimum surface: shell works offline, API/tokens are never cached, and the version bump + skipWaiting/claim prevents stale lock-in. Hand-written keeps it auditable and dependency-free.
 - **Alternatives considered**: Workbox/next-pwa precaching — rejected (YAGNI; opaque generated SW harder to audit for the "no API/token caching" guarantee). Caching API GETs for offline reads — rejected: violates "no stale data as current" and risks leaking sensitive responses.
 - **Update strategy (explicit)**: bump the cache version constant per release; `skipWaiting` + `clients.claim` activate the new SW immediately; the registrar listens for `controllerchange` and triggers a single reload so users land on the fresh shell without manual cache-clearing.

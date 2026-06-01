@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: User description: Convert the existing desktop-perfect TaskFlow UI into a fully
+**Input**: User description: Convert the existing desktop-perfect IDARA UI into a fully
 responsive site that works flawlessly across all mobile and tablet sizes, without
 altering the desktop version. Additive changes only; preserve the existing design
 language, colors, typography hierarchy, and spacing. Cover small/standard/large phones,
@@ -16,7 +16,7 @@ spacing, mobile-friendly forms, and reduced-motion/performance.
 
 ## Overview
 
-TaskFlow's interface is production-ready on desktop but does not adapt to phones and
+IDARA's interface is production-ready on desktop but does not adapt to phones and
 tablets. This feature makes every screen usable and well-laid-out across all common
 small screen sizes — **without changing how the app looks or behaves on desktop**. All
 changes are additive (responsive rules that apply only below desktop widths); the desktop
@@ -31,7 +31,7 @@ drag‑and‑drop, labels, members, real-time, themes, bilingual RTL/LTR) is unc
 
 ### User Story 1 - Use the app on a phone without breakage (Priority: P1)
 
-A person opens TaskFlow on their phone (anywhere from a 320px small phone to a 767px large
+A person opens IDARA on their phone (anywhere from a 320px small phone to a 767px large
 phone). Every screen fits the viewport: content reflows to a single readable column where
 appropriate, text is legible (never tiny), tap targets are comfortable, and **the page
 never scrolls sideways**. Nothing overlaps, gets cut off, or forces pinch-zoom.

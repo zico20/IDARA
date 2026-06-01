@@ -5,7 +5,7 @@ export type Direction = "rtl" | "ltr";
 
 export const LOCALES: readonly Locale[] = ["ar", "en"] as const;
 export const DEFAULT_LOCALE: Locale = "ar";
-export const LOCALE_COOKIE = "taskflow-locale";
+export const LOCALE_COOKIE = "idara-locale";
 
 /** Direction for a locale. Arabic is RTL, English is LTR. */
 export function dirFor(locale: Locale): Direction {

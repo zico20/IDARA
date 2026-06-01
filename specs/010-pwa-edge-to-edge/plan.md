@@ -6,7 +6,7 @@
 
 ## Summary
 
-Turn the TaskFlow frontend into an installable PWA with an edge-to-edge mobile shell and graceful offline/error states, frontend-only and additive:
+Turn the IDARA frontend into an installable PWA with an edge-to-edge mobile shell and graceful offline/error states, frontend-only and additive:
 
 1. **Edge-to-edge + status-bar color** (P1) — set `viewport.themeColor` (per-theme via `media`) to the `--bg` background so the iOS status-bar area blends instead of showing black; set `viewport-fit=cover`; pad the app shell with `env(safe-area-inset-*)` on mobile only; switch the app shell height from `h-screen` (100vh) to `100dvh` so dynamic browser chrome doesn't clip content. Desktop untouched.
 2. **Installability** (P2) — add a Next.js native `app/manifest.ts` (name, short_name, start_url, `display: standalone`, brand background/theme colors, icon set incl. maskable 512) + `app/icon.tsx`/`app/apple-icon.tsx` (generated via `ImageResponse`) + Apple PWA meta tags through the `metadata`/`viewport` API. No `next-pwa`.

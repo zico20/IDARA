@@ -1,4 +1,4 @@
-# TaskFlow — Architecture
+# IDARA — Architecture
 
 This document covers the layered design, data model, real-time mechanics, and the
 scaling path. For setup and feature docs see the root [README](../README.md).

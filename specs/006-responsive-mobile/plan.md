@@ -6,7 +6,7 @@
 
 ## Summary
 
-Make the existing TaskFlow UI fully responsive on phones and tablets **without touching
+Make the existing IDARA UI fully responsive on phones and tablets **without touching
 the desktop layout (≥1280px)**. All changes are additive Tailwind responsive utilities +
 a small global CSS layer + one new mobile-nav behavior. Concretely: add a viewport meta;
 turn the always-present sidebar into an off-canvas drawer behind an accessible hamburger

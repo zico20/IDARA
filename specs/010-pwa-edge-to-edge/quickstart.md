@@ -46,7 +46,7 @@ npm run build      # only with the dev server stopped
 Backend: unchanged by this feature (no backend edits); existing `pytest`/`ruff` remain green.
 
 ## Inspection checklist (security/consistency)
-- DevTools → Application → Cache Storage: the `taskflow-shell-v{N}` cache contains **only** the shell + `/offline` + static assets — **no** `/api/*` responses, **no** tokens/cookies.
+- DevTools → Application → Cache Storage: the `idara-shell-v{N}` cache contains **only** the shell + `/offline` + static assets — **no** `/api/*` responses, **no** tokens/cookies.
 - DevTools → Application → Service Workers: a new build activates and reloads once (no manual "Update on reload" needed).
 
 ## Notes / conventions reused

@@ -1,5 +1,5 @@
 # [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- Example: Spec Constitution, IDARA Constitution, etc. -->
 
 ## Core Principles
 

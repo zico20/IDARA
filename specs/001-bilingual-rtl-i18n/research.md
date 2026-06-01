@@ -15,7 +15,7 @@ All Technical-Context unknowns are resolved below. Net new runtime dependencies:
   `<html lang="en">`.
 - Logical Tailwind utilities are barely used (~4 `ms-/me-/...` occurrences); most layout
   uses physical utilities — a conversion pass is required.
-- Zustand store persists to localStorage (`taskflow-ui`); localStorage is client-only
+- Zustand store persists to localStorage (`idara-ui`); localStorage is client-only
   (invisible to SSR → relevant to first-paint direction).
 - dnd-kit boards use `closestCorners` with a horizontal column `SortableContext` — the
   RTL-sensitive spot.
@@ -89,7 +89,7 @@ mode (English column names read fine LTR).
 
 ## Decision 4 — Persistence: cookie (source of truth) + Zustand mirror
 
-**Decision**: Store `locale` in a cookie (`taskflow-locale`, `path=/`, ~1y, `SameSite=Lax`,
+**Decision**: Store `locale` in a cookie (`idara-locale`, `path=/`, ~1y, `SameSite=Lax`,
 not HttpOnly) as the authoritative value for first paint; mirror into the existing Zustand
 store for reactive client reads. On toggle: update Zustand **and** write the cookie, then
 update `document.documentElement.dir/lang` directly for an instant flip.
@@ -113,7 +113,7 @@ dynamic (acceptable for this interactive app).
 ## Decision 5 — Default = Arabic/RTL, resolved server-side
 
 **Decision**: When no cookie is present, default to Arabic/RTL in the root layout:
-`cookies().get("taskflow-locale")?.value ?? "ar"` → `<html lang="ar" dir="rtl">` on the
+`cookies().get("idara-locale")?.value ?? "ar"` → `<html lang="ar" dir="rtl">` on the
 first server response.
 
 **Rationale**: Computing the default server-side from cookie absence means the first HTML

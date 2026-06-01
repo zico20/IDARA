@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     )
 
     # --- App ---
-    PROJECT_NAME: str = "TaskFlow"
+    PROJECT_NAME: str = "IDARA"
     ENVIRONMENT: Literal["development", "test", "production"] = "development"
     DEBUG: bool = True
     API_V1_PREFIX: str = "/api"
@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     # --- Database ---
     # Default to a local SQLite file so the app runs without Docker/Postgres.
     # In Docker / production set DATABASE_URL to a postgresql+asyncpg:// URL.
-    DATABASE_URL: str = "sqlite+aiosqlite:///./taskflow.db"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./idara.db"
 
     # --- Security / JWT ---
     SECRET_KEY: str = "CHANGE_ME_IN_PRODUCTION_use_a_long_random_string"
@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     PASSWORD_RESET_TOKEN_EXPIRE_MINUTES: int = 30
 
     # Cookie settings for the httpOnly JWT cookie.
-    COOKIE_NAME: str = "taskflow_access_token"
+    COOKIE_NAME: str = "idara_access_token"
     COOKIE_SECURE: bool = False  # set True in production (HTTPS only)
     COOKIE_SAMESITE: Literal["lax", "strict", "none"] = "lax"
     COOKIE_DOMAIN: str | None = None

@@ -6,7 +6,7 @@ import { useLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 type Theme = "dark" | "light";
-const THEME_KEY = "taskflow-theme";
+const THEME_KEY = "idara-theme";
 
 /**
  * Light/Dark toggle. The Liquid Glass tokens adapt automatically — switching

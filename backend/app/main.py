@@ -1,4 +1,4 @@
-"""TaskFlow FastAPI application entrypoint."""
+"""IDARA FastAPI application entrypoint."""
 from __future__ import annotations
 
 import logging
@@ -14,7 +14,7 @@ from app.core.errors import register_exception_handlers
 from app.core.rate_limit import limiter
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("taskflow")
+logger = logging.getLogger("idara")
 
 
 @asynccontextmanager

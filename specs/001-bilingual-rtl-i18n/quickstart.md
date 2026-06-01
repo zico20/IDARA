@@ -13,7 +13,7 @@ How to build, run, and verify this feature. No new dependencies are required.
 
 1. **i18n core** — `src/lib/i18n/`: `dictionaries.ts` (typed `en`/`ar`), `LocaleProvider`,
    `useLocale`/`useT`, `humanizeActivity`, `dateFnsLocale`.
-2. **Wire SSR** — root `layout.tsx` reads the `taskflow-locale` cookie, sets `<html lang
+2. **Wire SSR** — root `layout.tsx` reads the `idara-locale` cookie, sets `<html lang
    dir>`, wraps children in `LocaleProvider` seeded with the server locale. Add Zustand
    `locale`/`setLocale` (mirror to cookie).
 3. **Language switcher** — a toggle component placed in the landing header and the app top
@@ -47,7 +47,7 @@ cd frontend && npm run dev                                               # http:
 2. **SC-002 (<1s switch, keep place)**: On a board, toggle language — text + direction flip
    in under a second and you stay on the same board.
 3. **SC-003 (persistence)**: Choose a language, reload, navigate, close and reopen the
-   tab — it stays in that language. First-ever visit (clear the `taskflow-locale` cookie) →
+   tab — it stays in that language. First-ever visit (clear the `idara-locale` cookie) →
    defaults to Arabic/RTL with no flash.
 4. **SC-004 (RTL journey)**: In Arabic, run demo → signup → create board → create task →
    move task. No clipped/overlapping/mis-aligned/wrong-direction elements; drag-and-drop

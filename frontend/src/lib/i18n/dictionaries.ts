@@ -7,7 +7,7 @@
 
 export const en = {
   // --- Common ---
-  "common.appName": "TaskFlow",
+  "common.appName": "IDARA",
   "common.tagline": "Real-time collaborative kanban",
   "common.cancel": "Cancel",
   "common.create": "Create",
@@ -60,7 +60,7 @@ export const en = {
     "Try the demo board now, or create your free account and keep your work forever.",
   "landing.cta.tryDemo": "Try the demo board",
   "landing.cta.createAccount": "Create account",
-  "landing.footer": "TaskFlow — real-time collaborative kanban.",
+  "landing.footer": "IDARA — real-time collaborative kanban.",
 
   // --- Auth ---
   "auth.login.title": "Welcome back",
@@ -377,7 +377,7 @@ export type Dictionary = Record<MessageKey, string>;
 
 export const ar: Dictionary = {
   // --- Common ---
-  "common.appName": "TaskFlow",
+  "common.appName": "إدارة",
   "common.tagline": "لوحة مهام تعاونية لحظية",
   "common.cancel": "إلغاء",
   "common.create": "إنشاء",
@@ -430,7 +430,7 @@ export const ar: Dictionary = {
     "جرّب اللوحة التجريبية الآن، أو أنشئ حسابك المجاني واحفظ عملك للأبد.",
   "landing.cta.tryDemo": "جرّب اللوحة التجريبية",
   "landing.cta.createAccount": "إنشاء حساب",
-  "landing.footer": "TaskFlow — لوحة مهام تعاونية لحظية.",
+  "landing.footer": "إدارة — لوحة مهام تعاونية لحظية.",
 
   // --- Auth ---
   "auth.login.title": "مرحباً بعودتك",

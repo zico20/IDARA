@@ -45,7 +45,7 @@ Run the app (`npm run dev` in `frontend/`, backend on :8000) and check:
 6. Create / open / delete a board → unchanged behavior.
 
 ### C. Board view, drawer, dialogs (US3)
-7. Open a board → breadcrumb header (TaskFlow/boards › title) + toolbar (search +
+7. Open a board → breadcrumb header (IDARA/boards › title) + toolbar (search +
    presence) + full-width kanban.
 8. Toggle activity → a drawer slides over and closes with the same control; same content.
 9. Open a task → two-column dialog (content ǀ properties: priority, due, labels); save/

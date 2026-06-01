@@ -6,13 +6,13 @@
 
 **Status**: Draft
 
-**Input**: User description: Turn the TaskFlow frontend into an installable Progressive Web App that opens standalone from the home screen, extends its background edge-to-edge behind the mobile status bar (instead of a separate black strip), works with basic offline support, and gracefully handles errors/not-found — all frontend-only, additive, bilingual (AR فصحى/EN), RTL/LTR- and theme-correct, reduced-motion/transparency safe, and without changing the settled desktop (≥1280px) appearance.
+**Input**: User description: Turn the IDARA frontend into an installable Progressive Web App that opens standalone from the home screen, extends its background edge-to-edge behind the mobile status bar (instead of a separate black strip), works with basic offline support, and gracefully handles errors/not-found — all frontend-only, additive, bilingual (AR فصحى/EN), RTL/LTR- and theme-correct, reduced-motion/transparency safe, and without changing the settled desktop (≥1280px) appearance.
 
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Status bar blends with the app on mobile (Priority: P1)
 
-A visitor opens TaskFlow on a phone browser. The area behind the system status bar (clock, signal, battery) takes on the app's own background color instead of showing a disconnected black strip, so the page feels like one continuous surface. This holds in both light and dark themes.
+A visitor opens IDARA on a phone browser. The area behind the system status bar (clock, signal, battery) takes on the app's own background color instead of showing a disconnected black strip, so the page feels like one continuous surface. This holds in both light and dark themes.
 
 **Why this priority**: This is the exact problem the user raised, it is the highest-visibility fix, and it needs none of the heavier PWA machinery (no install, no service worker) — just correct color + viewport handling. It delivers value on its own.
 
@@ -27,9 +27,9 @@ A visitor opens TaskFlow on a phone browser. The area behind the system status b
 
 ---
 
-### User Story 2 - Install TaskFlow to the home screen (Priority: P2)
+### User Story 2 - Install IDARA to the home screen (Priority: P2)
 
-A user chooses "Add to Home Screen" (or an install prompt) and launches TaskFlow as a standalone app: it opens without browser chrome, shows the correct app name and icon, and uses the brand colors for its splash/background.
+A user chooses "Add to Home Screen" (or an install prompt) and launches IDARA as a standalone app: it opens without browser chrome, shows the correct app name and icon, and uses the brand colors for its splash/background.
 
 **Why this priority**: Installability is the core PWA promise and what makes the edge-to-edge experience fully native-feeling, but it depends on the foundational metadata being correct, so it follows the status-bar fix.
 
@@ -37,7 +37,7 @@ A user chooses "Add to Home Screen" (or an install prompt) and launches TaskFlow
 
 **Acceptance Scenarios**:
 
-1. **Given** a supported browser, **When** the user opens the browser menu, **Then** an install / "Add to Home Screen" option is available for TaskFlow.
+1. **Given** a supported browser, **When** the user opens the browser menu, **Then** an install / "Add to Home Screen" option is available for IDARA.
 2. **Given** the app is installed, **When** the user taps its home-screen icon, **Then** it launches standalone (no browser address bar) with the correct name and icon.
 3. **Given** the installed app launches, **When** it first paints, **Then** the background/splash uses the app's brand background color (matching the active theme baseline) with no flash of an unrelated color.
 4. **Given** the manifest and icons load, **When** the page is audited, **Then** there are no missing-icon or invalid-manifest errors.
@@ -118,7 +118,7 @@ When the network drops or a page fails to load, the user sees a clear, on-brand 
 
 - **SC-001**: On a mobile browser, the status-bar area matches the app background in both themes 100% of the time (no black strip), verified in dark and light.
 - **SC-002**: On a notched device, 0 interactive elements are clipped by the notch/clock or home indicator, while the background still fills to the edges.
-- **SC-003**: A user can install TaskFlow and launch it standalone with the correct name and icon, with 0 manifest/icon errors reported by a standard PWA audit.
+- **SC-003**: A user can install IDARA and launch it standalone with the correct name and icon, with 0 manifest/icon errors reported by a standard PWA audit.
 - **SC-004**: After one online visit, reopening the app offline shows the branded offline screen (not the browser default) in ≥ the supported browsers tested.
 - **SC-005**: Deploying a new version and reopening results in the updated app (the user is never stuck on a stale shell).
 - **SC-006**: No auth token or mutable API response is present in the offline cache (verified by inspection).

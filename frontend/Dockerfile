@@ -1,4 +1,4 @@
-# --- TaskFlow frontend (Next.js 14, standalone output) ---
+# --- IDARA frontend (Next.js 14, standalone output) ---
 FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./

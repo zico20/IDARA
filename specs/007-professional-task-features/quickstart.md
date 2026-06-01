@@ -6,7 +6,7 @@ How to run, verify, and demo this feature end-to-end. Mirrors the project standa
 
 - Backend deps installed (`backend/.venv`), `backend/.env` present.
 - Frontend deps installed (`frontend/`), `frontend/.env.local` present.
-- Local dev DB is SQLite (`backend/taskflow_dev.db`) — no Docker needed (per project memory).
+- Local dev DB is SQLite (`backend/idara_dev.db`) — no Docker needed (per project memory).
 
 ## Apply the migration (dev)
 

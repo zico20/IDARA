@@ -98,8 +98,8 @@ no flash); a fresh user starts Dark.
 ### Implementation for User Story 2
 
 - [x] T015 [P] [US2] Add the new `frontend/src/components/backdrop.tsx` (fixed `.tf-aurora` brand layer) from `NewDesign/`
-- [x] T016 [P] [US2] Add the new `frontend/src/components/theme-switcher.tsx` (toggles the `light`/`dark` class on `<html>`, persists to `localStorage` `taskflow-theme`) from `NewDesign/`
-- [x] T017 [US2] Edit `frontend/src/app/layout.tsx` to add the no-flash inline `<script>` (reads `localStorage['taskflow-theme']`, sets the `light`/`dark` class before first paint) just before `<Providers>`, matching `NewDesign/app/layout.tsx`
+- [x] T016 [P] [US2] Add the new `frontend/src/components/theme-switcher.tsx` (toggles the `light`/`dark` class on `<html>`, persists to `localStorage` `idara-theme`) from `NewDesign/`
+- [x] T017 [US2] Edit `frontend/src/app/layout.tsx` to add the no-flash inline `<script>` (reads `localStorage['idara-theme']`, sets the `light`/`dark` class before first paint) just before `<Providers>`, matching `NewDesign/app/layout.tsx`
 - [x] T018 [US2] Replace `frontend/src/components/app-shell.tsx` with the `NewDesign/` version (mounts `<ThemeSwitcher/>` in the top bar; `.glass-bar` header; gradient logo) — depends on T016
 - [x] T019 [US2] Replace `frontend/src/app/(app)/layout.tsx` with the `NewDesign/` version (renders `<Backdrop/>`, `z-10` content wrapper) — depends on T015
 

@@ -11,7 +11,7 @@ client-side UI preference.
 | Aspect | Value |
 |--------|-------|
 | What | The user's chosen interface appearance: `dark` or `light`. |
-| Where stored | Browser `localStorage`, key `taskflow-theme`, value `"dark"` \| `"light"`. |
+| Where stored | Browser `localStorage`, key `idara-theme`, value `"dark"` \| `"light"`. |
 | Default | `dark` (no stored value → dark), matching today's app. |
 | Scope | Per browser/device. **Not** synced to the account, **not** persisted server-side, **not** in the database. |
 | How applied | The `light`/`dark` class on the `<html>` element. A no-flash inline script in the root layout applies the stored value before first paint; `ThemeSwitcher` updates both the class and `localStorage`. |

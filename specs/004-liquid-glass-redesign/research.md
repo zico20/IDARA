@@ -10,7 +10,7 @@ against the current `frontend/` was performed; results below.
 ### NEW — no counterpart in `frontend/src/` (3)
 - `components/backdrop.tsx` — fixed brand-aurora layer (`<div class="tf-aurora">`).
 - `components/theme-switcher.tsx` — light/dark toggle; flips `light` class on `<html>`,
-  persists to `localStorage` (`taskflow-theme`).
+  persists to `localStorage` (`idara-theme`).
 - `app/(auth)/forgot-password/page.tsx` — UI-only reset-request screen.
 
 ### DIFFERENT — restyle of an existing file (21)
@@ -63,7 +63,7 @@ files (`board-settings-dialog`, `create-board-dialog`, `activity-feed`,
 
 ### D3 — Theme switching mechanism
 - **Decision**: Keep the design's approach: a no-flash inline `<script>` in
-  `app/layout.tsx` reads `localStorage['taskflow-theme']` and sets the `light`/`dark`
+  `app/layout.tsx` reads `localStorage['idara-theme']` and sets the `light`/`dark`
   class on `<html>` before first paint; `ThemeSwitcher` toggles that class and
   persists. Dark is the default (matches today).
 - **Rationale**: Standard, dependency-free, SSR-safe (no hydration flash). Theme is

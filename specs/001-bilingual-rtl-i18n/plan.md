@@ -23,7 +23,7 @@ client from existing structured data. **No new runtime dependencies; no backend 
 variants, built in), Zustand 5 (`persist`), TanStack Query 5, date-fns 4 (ships `ar` +
 `enUS` locales), dnd-kit 6. Optional: one Arabic `next/font` for typography polish.
 
-**Storage**: Cookie `taskflow-locale` (SSR source of truth) + Zustand mirror. No database.
+**Storage**: Cookie `idara-locale` (SSR source of truth) + Zustand mirror. No database.
 
 **Testing**: Vitest (unit) for the i18n module; manual + Playwright walkthrough for the RTL
 journey and dnd-kit behavior.
@@ -50,7 +50,7 @@ board view, dialogs, activity feed, toasts, empty states).
 | I. Layered Architecture & Separation of Concerns | ✅ Pass | i18n lives in a dedicated `src/lib/i18n/` module; server state stays in TanStack Query, the `locale` UI preference goes in Zustand (UI state) — not conflated. Activity sentences are rebuilt on the **frontend** from existing structured data, keeping the backend locale-agnostic. |
 | II. Test Discipline (NON-NEGOTIABLE) | ✅ Pass | Vitest unit tests planned for `t` interpolation + missing-key fallback, `dir` derivation, and `humanizeActivity` (all action types + unknown fallback). All gates (`tsc`/`eslint`/`vitest`/`build`) must stay green. |
 | III. Real-Time Consistency & Optimistic UX | ✅ Pass | No change to REST-as-source-of-truth. Localizing activity client-side actually improves consistency (existing feed entries re-localize live on toggle, no refetch). |
-| IV. Security & Privacy by Default | ✅ Pass | The `taskflow-locale` cookie is a non-sensitive UI preference (`SameSite=Lax`, not HttpOnly by necessity). No auth/secret/role changes; error messages now localized still use the consistent shape. |
+| IV. Security & Privacy by Default | ✅ Pass | The `idara-locale` cookie is a non-sensitive UI preference (`SameSite=Lax`, not HttpOnly by necessity). No auth/secret/role changes; error messages now localized still use the consistent shape. |
 | V. Pragmatic Simplicity (YAGNI) | ✅ Pass | Custom ~40-line i18n over heavy libraries; toggle (no locale routing); zero new runtime deps; reuse Zustand + date-fns + Tailwind built-ins. |
 
 **Result**: PASS (no violations; Complexity Tracking not required).

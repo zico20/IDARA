@@ -1,5 +1,5 @@
 /*
- * TaskFlow service worker — minimal, hand-written, auditable.
+ * IDARA service worker — minimal, hand-written, auditable.
  *
  * Scope: app shell + static assets only, plus a branded /offline fallback.
  * It NEVER caches API responses (/api/*), auth/cookies, non-GET requests, or
@@ -11,7 +11,7 @@
  * once on controllerchange so users are never stuck on a stale shell.
  */
 const CACHE_VERSION = "v1";
-const CACHE_NAME = `taskflow-shell-${CACHE_VERSION}`;
+const CACHE_NAME = `idara-shell-${CACHE_VERSION}`;
 
 // Minimal precache: the offline page + the app entry. Build assets are cached
 // on demand (cache-first) as they're requested.
@@ -33,7 +33,7 @@ self.addEventListener("activate", (event) => {
       .then((keys) =>
         Promise.all(
           keys
-            .filter((k) => k.startsWith("taskflow-shell-") && k !== CACHE_NAME)
+            .filter((k) => k.startsWith("idara-shell-") && k !== CACHE_NAME)
             .map((k) => caches.delete(k)),
         ),
       )

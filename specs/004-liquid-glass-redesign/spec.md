@@ -10,7 +10,7 @@
 
 ## Overview
 
-A complete visual redesign of TaskFlow's interface — the "Liquid Glass" aesthetic
+A complete visual redesign of IDARA's interface — the "Liquid Glass" aesthetic
 (translucent, luminous *floating* surfaces layered over solid, readable work
 surfaces) — has been prepared in the `NewDesign/` folder. This feature adopts that
 redesign as the product's main, default appearance.
@@ -27,7 +27,7 @@ unchanged.
 
 ### User Story 1 - The whole app wears the new look (Priority: P1)
 
-Any user opening TaskFlow sees the new Liquid Glass appearance everywhere — the
+Any user opening IDARA sees the new Liquid Glass appearance everywhere — the
 landing page, login/signup, the boards list, a board with its columns and cards,
 dialogs, the activity panel, presence avatars, and the demo board. Floating chrome
 (top bar, modals, menus, pills, toasts, the activity panel) has the translucent

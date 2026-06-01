@@ -198,7 +198,7 @@ function BoardPreview() {
         <span className="h-3 w-3 rounded-full bg-danger/70" />
         <span className="h-3 w-3 rounded-full bg-warning/70" />
         <span className="h-3 w-3 rounded-full bg-success/70" />
-        <span className="ms-2 text-xs text-fg-subtle">TaskFlow — Sprint Board</span>
+        <span className="ms-2 text-xs text-fg-subtle">IDARA — Sprint Board</span>
       </div>
       <div className="grid grid-cols-3 gap-3">
         {cols.map((c) => (

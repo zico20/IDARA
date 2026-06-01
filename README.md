@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🗂️ TaskFlow
+# 🗂️ IDARA
 
 ### A modern, real-time collaborative kanban task manager
 
@@ -19,10 +19,10 @@ Build boards, drag tasks across columns, and collaborate live — changes appear
 
 </div>
 
-> _**Live demo:** `https://taskflow-demo.example.com` (placeholder — drop your deployed URL here)_
+> _**Live demo:** `https://idara-demo.example.com` (placeholder — drop your deployed URL here)_
 
 <!-- Add a hero GIF/screenshot here, e.g. docs/hero.gif -->
-<!-- ![TaskFlow board view](docs/hero.gif) -->
+<!-- ![IDARA board view](docs/hero.gif) -->
 
 ---
 
@@ -112,7 +112,7 @@ Route (HTTP/validation)  →  Service (business logic)  →  Repository (data ac
 ## 📁 Folder structure
 
 ```
-taskflow/
+idara/
 ├── backend/
 │   ├── app/
 │   │   ├── api/           # routes + dependencies (auth, permission guards)
@@ -151,7 +151,7 @@ taskflow/
 ### Option A — Docker (everything at once)
 
 ```bash
-git clone <your-repo-url> taskflow && cd taskflow
+git clone <your-repo-url> idara && cd idara
 
 # Set a strong secret (optional for local; required for anything public)
 export SECRET_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(48))')"
@@ -252,7 +252,7 @@ FastAPI serves auto-generated, interactive docs:
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `DATABASE_URL` | `sqlite+aiosqlite:///./taskflow.db` | DB connection (use `postgresql+asyncpg://…` in prod) |
+| `DATABASE_URL` | `sqlite+aiosqlite:///./idara.db` | DB connection (use `postgresql+asyncpg://…` in prod) |
 | `SECRET_KEY` | _change me_ | JWT signing secret |
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | `1440` | Access token lifetime |
 | `COOKIE_SECURE` | `false` | Set `true` behind HTTPS |

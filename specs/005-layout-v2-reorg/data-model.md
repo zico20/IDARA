@@ -21,7 +21,7 @@ existing data is displayed.
 
 - **`activityPanelOpen`** (existing Zustand UI-store flag): now toggles the activity
   drawer instead of the inline panel. Unchanged shape/behavior.
-- **Theme preference** (`localStorage` `taskflow-theme`): unchanged from `004`.
+- **Theme preference** (`localStorage` `idara-theme`): unchanged from `004`.
 
 ## Validation rules
 

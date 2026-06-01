@@ -69,7 +69,7 @@ export default function RootLayout({
         {/* Apply the saved theme before first paint to avoid a flash. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('taskflow-theme');var e=document.documentElement;if(t==='light'){e.classList.add('light');e.classList.remove('dark');}else{e.classList.add('dark');e.classList.remove('light');}}catch(_){}`,
+            __html: `try{var t=localStorage.getItem('idara-theme');var e=document.documentElement;if(t==='light'){e.classList.add('light');e.classList.remove('dark');}else{e.classList.add('dark');e.classList.remove('light');}}catch(_){}`,
           }}
         />
         <ServiceWorkerRegistrar />

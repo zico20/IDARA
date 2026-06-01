@@ -46,9 +46,9 @@ provider, hooks, cookie/Zustand persistence, and SSR direction wiring.
 - [x] T003 Define `Locale`/`Direction` types and the `dir` derivation helper (`ar→rtl`, `en→ltr`, invalid→default `ar`) in `frontend/src/lib/i18n/locale.ts`
 - [x] T004 Create typed dictionaries `en` and `ar` as flat maps with a shared `MessageKey` union (start with shared/common keys; story phases add their own) in `frontend/src/lib/i18n/dictionaries.ts`
 - [x] T005 Implement the `t(key, params?)` lookup with `{param}` interpolation and missing-key fallback (active locale → other locale → key text; never blank/throw) in `frontend/src/lib/i18n/translate.ts`
-- [x] T006 Add `locale` + `setLocale(next)` to the Zustand UI store, writing the `taskflow-locale` cookie (`path=/`, ~1y, `SameSite=Lax`, not HttpOnly) and updating `document.documentElement.{dir,lang}` synchronously, in `frontend/src/stores/ui-store.ts`
+- [x] T006 Add `locale` + `setLocale(next)` to the Zustand UI store, writing the `idara-locale` cookie (`path=/`, ~1y, `SameSite=Lax`, not HttpOnly) and updating `document.documentElement.{dir,lang}` synchronously, in `frontend/src/stores/ui-store.ts`
 - [x] T007 Implement `LocaleProvider` (client) seeded from an `initialLocale` prop — must NOT read localStorage on first render — and `useLocale()`/`useT()` hooks in `frontend/src/lib/i18n/locale-provider.tsx`
-- [x] T008 Read the `taskflow-locale` cookie server-side in `frontend/src/app/layout.tsx`, set `<html lang dir>` accordingly (default `ar`/`rtl`), apply the Arabic font class when `lang="ar"`, and wrap children in `LocaleProvider initialLocale={locale}` (via `frontend/src/components/providers.tsx`)
+- [x] T008 Read the `idara-locale` cookie server-side in `frontend/src/app/layout.tsx`, set `<html lang dir>` accordingly (default `ar`/`rtl`), apply the Arabic font class when `lang="ar"`, and wrap children in `LocaleProvider initialLocale={locale}` (via `frontend/src/components/providers.tsx`)
 - [x] T009 Build the `LanguageSwitcher` component (AR/EN toggle calling `setLocale`) in `frontend/src/components/language-switcher.tsx`
 - [x] T010 [P] Unit test the foundational core (`dir` derivation, `t` interpolation + missing-key fallback) in `frontend/src/lib/i18n/__tests__/translate.test.ts`
 

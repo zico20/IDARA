@@ -47,7 +47,7 @@ function useT(): (key: MessageKey, params?: Record<string, string | number>) => 
 ```
 
 **`setLocale` contract** (FR-003, FR-005):
-- Writes the `taskflow-locale` cookie, updates the Zustand mirror, and sets
+- Writes the `idara-locale` cookie, updates the Zustand mirror, and sets
   `document.documentElement.{dir,lang}` synchronously.
 - Takes visible effect in < 1 second (SC-002) without navigation/data reload.
 - An invalid argument is ignored (no crash).

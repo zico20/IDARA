@@ -15,7 +15,7 @@ from app.core.security import (
 from app.models.user import User
 from app.repositories import user_repo
 
-logger = logging.getLogger("taskflow.auth")
+logger = logging.getLogger("idara.auth")
 
 
 async def register_user(

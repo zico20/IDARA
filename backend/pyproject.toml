@@ -1,7 +1,7 @@
 [project]
-name = "taskflow-backend"
+name = "idara-backend"
 version = "1.0.0"
-description = "TaskFlow real-time kanban — FastAPI backend"
+description = "IDARA real-time kanban — FastAPI backend"
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]

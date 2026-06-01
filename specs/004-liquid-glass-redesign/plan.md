@@ -31,7 +31,7 @@ i18n module. **No new dependencies** (every import in `NewDesign/` already resol
 `frontend/package.json`).
 
 **Storage**: N/A for data. The only persisted state is the theme preference, stored in
-`localStorage` (`taskflow-theme`) on the device — not the account, not the database.
+`localStorage` (`idara-theme`) on the device — not the account, not the database.
 
 **Testing**: Vitest (existing suite, incl. the AR/EN dictionary-parity test) +
 `tsc --noEmit` + `next build` + a manual theme × language (Dark/Light × AR/EN) and

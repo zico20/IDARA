@@ -21,7 +21,7 @@ export default function DemoPage() {
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-accent-subtle text-bg shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
               <LayoutGrid size={16} />
             </span>
-            <span className="font-semibold">TaskFlow</span>
+            <span className="text-[17px] font-semibold">{t("common.appName")}</span>
           </Link>
           {/* Consistent square icon buttons (theme · language · login) — icon-only
               so the bar never overflows on small phones. Signup is reachable from

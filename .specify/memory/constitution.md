@@ -2,7 +2,7 @@
 SYNC IMPACT REPORT
 ==================
 Version change: (template/unfilled) → 1.0.0
-Rationale: First concrete ratification of the TaskFlow constitution (placeholders
+Rationale: First concrete ratification of the IDARA constitution (placeholders
            replaced with real, project-specific principles). MINOR/MAJOR not
            applicable from an unversioned template; adopting 1.0.0 as the baseline.
 
@@ -27,9 +27,9 @@ Templates reviewed for alignment:
 Deferred / TODO: none.
 -->
 
-# TaskFlow Constitution
+# IDARA Constitution
 
-TaskFlow is a real-time collaborative kanban task manager (FastAPI backend +
+IDARA is a real-time collaborative kanban task manager (FastAPI backend +
 Next.js 14 frontend). This constitution defines the non-negotiable engineering
 principles that govern how the project is built and changed.
 
