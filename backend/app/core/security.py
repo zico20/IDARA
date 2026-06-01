@@ -1,7 +1,7 @@
 """Security helpers: password hashing and JWT creation/decoding."""
 from __future__ import annotations
 
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 import bcrypt
@@ -30,7 +30,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 # --- JWT ---
 def _create_token(subject: str, expires_delta: timedelta, token_type: str) -> str:
-    now = datetime.now(UTC)
+    now = datetime.now(timezone.utc)
     payload: dict[str, Any] = {
         "sub": subject,
         "iat": now,

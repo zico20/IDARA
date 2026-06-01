@@ -2,7 +2,7 @@
 name = "idara-backend"
 version = "1.0.0"
 description = "IDARA real-time kanban — FastAPI backend"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
@@ -17,7 +17,9 @@ omit = ["app/main.py", "alembic/*"]
 
 [tool.ruff]
 line-length = 90
-target-version = "py311"
+# Target the lowest supported runtime (the deploy server runs 3.10) so lint
+# rules don't suggest 3.11-only constructs like `datetime.UTC`.
+target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "PLC"]
