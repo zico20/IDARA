@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FieldError, Input, Label, Textarea } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useT } from "@/lib/i18n";
 import type { Label as LabelType, Priority, Task } from "@/lib/types";
@@ -190,17 +191,13 @@ export function TaskDialog({
           <div className="space-y-4 border-t border-border/70 bg-bg/30 p-5 md:border-s md:border-t-0">
             <div>
               <Label htmlFor="priority">{t("task.priority")}</Label>
-              <select
-                id="priority"
-                className="mt-1 flex h-9 w-full rounded-md border border-border bg-bg-subtle px-3 text-sm text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
-                {...register("priority")}
-              >
+              <Select id="priority" className="mt-1" {...register("priority")}>
                 {PRIORITIES.map((p) => (
                   <option key={p} value={p}>
                     {t(`priority.${p}`)}
                   </option>
                 ))}
-              </select>
+              </Select>
             </div>
 
             <div>

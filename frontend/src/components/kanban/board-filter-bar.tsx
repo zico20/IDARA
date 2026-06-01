@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Filter, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Select } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useT } from "@/lib/i18n";
 import type { MessageKey } from "@/lib/i18n";
@@ -113,17 +114,18 @@ export function BoardFilterBar({ boardId, labels }: BoardFilterBarProps) {
         {/* Sort selector is always visible (compact). */}
         <label className="flex items-center gap-1.5 text-[11.5px] text-fg-subtle">
           {t("sort.label")}
-          <select
+          <Select
+            selectSize="sm"
+            wrapperClassName="w-auto"
             value={sort}
             onChange={(e) => setSort(boardId, e.target.value as SortMode)}
-            className="h-8 rounded-md border border-border bg-bg-subtle px-2 text-[12px] text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
           >
             {SORTS.map((s) => (
               <option key={s} value={s}>
                 {t(`sort.${s}` as MessageKey)}
               </option>
             ))}
-          </select>
+          </Select>
         </label>
 
         {sort !== "manual" && (

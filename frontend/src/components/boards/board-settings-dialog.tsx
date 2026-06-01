@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Textarea } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { Avatar } from "@/components/ui/misc";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { cn } from "@/lib/utils";
@@ -214,14 +215,14 @@ function MembersTab({ board }: { board: BoardDetail }) {
             placeholder={t("settings.members.invitePlaceholder")}
             className="flex-1"
           />
-          <select
+          <Select
+            wrapperClassName="w-auto"
             value={role}
             onChange={(e) => setRole(e.target.value as "editor" | "viewer")}
-            className="h-9 rounded-md border border-border bg-bg-subtle px-2 text-sm text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
           >
             <option value="editor">{t("boards.role.editor")}</option>
             <option value="viewer">{t("boards.role.viewer")}</option>
-          </select>
+          </Select>
           <Button
             type="submit"
             loading={invite.isPending}
@@ -275,7 +276,9 @@ function MemberRow({
         </span>
       ) : (
         <>
-          <select
+          <Select
+            selectSize="sm"
+            wrapperClassName="w-auto"
             value={member.role}
             onChange={(e) =>
               updateRole.mutate(
@@ -287,11 +290,10 @@ function MemberRow({
               )
             }
             disabled={updateRole.isPending}
-            className="h-8 rounded-md border border-border bg-bg-subtle px-2 text-xs text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
           >
             <option value="editor">{t("boards.role.editor")}</option>
             <option value="viewer">{t("boards.role.viewer")}</option>
-          </select>
+          </Select>
           <button
             onClick={() => setConfirmOpen(true)}
             title={t("settings.members.remove")}
