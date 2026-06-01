@@ -1,7 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import type { Priority } from "@/lib/types";
+import type { Priority, TaskType } from "@/lib/types";
 import type { DueStatus } from "@/lib/due-status";
 import {
   EMPTY_VIEW,
@@ -20,6 +20,8 @@ interface BoardViewStore {
   toggleLabel: (boardId: number, labelId: number) => void;
   togglePriority: (boardId: number, p: Priority) => void;
   toggleDue: (boardId: number, d: DueStatus) => void;
+  toggleAssignee: (boardId: number, userId: number) => void;
+  toggleType: (boardId: number, t: TaskType) => void;
   setSort: (boardId: number, sort: SortMode) => void;
   clear: (boardId: number) => void;
 }
@@ -60,6 +62,26 @@ export const useBoardViewStore = create<BoardViewStore>((set, getState) => ({
         byBoard: {
           ...s.byBoard,
           [boardId]: { ...cur, dueFilter: toggle(cur.dueFilter, d) },
+        },
+      };
+    }),
+  toggleAssignee: (boardId, userId) =>
+    set((s) => {
+      const cur = s.byBoard[boardId] ?? EMPTY_VIEW;
+      return {
+        byBoard: {
+          ...s.byBoard,
+          [boardId]: { ...cur, assigneeFilter: toggle(cur.assigneeFilter, userId) },
+        },
+      };
+    }),
+  toggleType: (boardId, t) =>
+    set((s) => {
+      const cur = s.byBoard[boardId] ?? EMPTY_VIEW;
+      return {
+        byBoard: {
+          ...s.byBoard,
+          [boardId]: { ...cur, typeFilter: toggle(cur.typeFilter, t) },
         },
       };
     }),

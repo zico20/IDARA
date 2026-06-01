@@ -3,12 +3,13 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { CheckSquare } from "lucide-react";
-import { Badge } from "@/components/ui/misc";
+import { Avatar, Badge } from "@/components/ui/misc";
 import { cn } from "@/lib/utils";
 import { useT, useTCount } from "@/lib/i18n";
 import type { MessageKey } from "@/lib/i18n";
 import type { Priority, Task } from "@/lib/types";
 import { dueInfo, type DueStatus } from "@/lib/due-status";
+import { TASK_TYPE_META } from "@/lib/task-type";
 
 const PRIORITY_COLOR: Record<Priority, string> = {
   low: "#3FB950",
@@ -46,6 +47,18 @@ function DueBadge({ dueDate }: { dueDate: string | null }) {
   return <Badge color={DUE_COLOR[info.status]}>{label}</Badge>;
 }
 
+function TypeBadge({ type }: { type: Task["type"] }) {
+  const t = useT();
+  const meta = TASK_TYPE_META[type];
+  const Icon = meta.icon;
+  return (
+    <Badge color={meta.color} className="gap-1">
+      <Icon size={11} />
+      {t(meta.labelKey)}
+    </Badge>
+  );
+}
+
 export function TaskCardContent({ task }: { task: Task }) {
   const t = useT();
 
@@ -67,6 +80,7 @@ export function TaskCardContent({ task }: { task: Task }) {
         {task.title}
       </p>
       <div className="mt-2.5 flex flex-wrap items-center gap-2">
+        <TypeBadge type={task.type} />
         <Badge color={PRIORITY_COLOR[task.priority]}>
           {t(PRIORITY_KEY[task.priority])}
         </Badge>
@@ -75,6 +89,16 @@ export function TaskCardContent({ task }: { task: Task }) {
           <span className="inline-flex items-center gap-1 text-[11px] tabular-nums text-fg-subtle">
             <CheckSquare size={11} />
             {task.checklist_done}/{task.checklist_total}
+          </span>
+        )}
+        {task.assignee && (
+          <span className="ms-auto">
+            <Avatar
+              name={task.assignee.name}
+              src={task.assignee.avatar_url}
+              size={20}
+              title={task.assignee.name}
+            />
           </span>
         )}
       </div>

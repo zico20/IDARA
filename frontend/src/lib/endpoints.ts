@@ -12,6 +12,7 @@ import type {
   Label,
   Priority,
   Task,
+  TaskType,
   User,
 } from "./types";
 
@@ -94,6 +95,8 @@ export interface TaskInput {
   description?: string | null;
   due_date?: string | null;
   priority?: Priority;
+  type?: TaskType;
+  assignee_id?: number | null;
   label_ids?: number[];
 }
 

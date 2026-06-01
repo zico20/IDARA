@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.errors import NotFoundError
+from app.core.errors import NotFoundError, ValidationAppError
 from app.models.task import Task
-from app.repositories import column_repo, task_repo
+from app.repositories import board_repo, column_repo, task_repo
 from app.schemas.task import TaskCreate, TaskMove, TaskUpdate
 
 POSITION_STEP = task_repo.POSITION_STEP
@@ -19,10 +19,32 @@ async def _validate_column_on_board(
     return column
 
 
+async def _validate_assignee_on_board(
+    db: AsyncSession, *, board_id: int, assignee_id: int | None
+) -> None:
+    """An assignee, when set, MUST be a member of the task's board (FR-003).
+
+    `None` (unassigned) is always valid. A non-member id is rejected with a
+    structured 422 rather than silently ignored."""
+    if assignee_id is None:
+        return
+    member = await board_repo.get_member(
+        db, board_id=board_id, user_id=assignee_id
+    )
+    if member is None:
+        raise ValidationAppError(
+            "Assignee must be a member of this board.",
+            code="invalid_assignee",
+        )
+
+
 async def create_task(
     db: AsyncSession, *, board_id: int, column_id: int, data: TaskCreate
 ) -> Task:
     await _validate_column_on_board(db, board_id=board_id, column_id=column_id)
+    await _validate_assignee_on_board(
+        db, board_id=board_id, assignee_id=data.assignee_id
+    )
     labels = await task_repo.get_labels_by_ids(
         db, board_id=board_id, label_ids=data.label_ids
     )
@@ -34,6 +56,8 @@ async def create_task(
         description=data.description,
         due_date=data.due_date,
         priority=data.priority,
+        type=data.type,
+        assignee_id=data.assignee_id,
         position=position,
         labels=labels,
     )
@@ -53,6 +77,7 @@ async def get_owned_task(db: AsyncSession, *, board_id: int, task_id: int) -> Ta
 async def update_task(
     db: AsyncSession, *, board_id: int, task: Task, data: TaskUpdate
 ) -> Task:
+    fields_set = data.model_fields_set
     if data.title is not None:
         task.title = data.title
     if data.description is not None:
@@ -61,6 +86,15 @@ async def update_task(
         task.due_date = data.due_date
     if data.priority is not None:
         task.priority = data.priority
+    if data.type is not None:
+        task.type = data.type
+    # assignee_id is nullable: an explicit `null` means "unassign", so detect
+    # presence via the set fields rather than a None check.
+    if "assignee_id" in fields_set:
+        await _validate_assignee_on_board(
+            db, board_id=board_id, assignee_id=data.assignee_id
+        )
+        task.assignee_id = data.assignee_id
     if data.label_ids is not None:
         labels = await task_repo.get_labels_by_ids(
             db, board_id=board_id, label_ids=data.label_ids
@@ -68,7 +102,7 @@ async def update_task(
         task.labels = labels
     db.add(task)
     await db.flush()
-    await db.refresh(task, attribute_names=["labels"])
+    await db.refresh(task, attribute_names=["labels", "assignee"])
     return task
 
 
@@ -114,5 +148,5 @@ async def move_task(
             db.add(t)
 
     await db.flush()
-    await db.refresh(task, attribute_names=["labels"])
+    await db.refresh(task, attribute_names=["labels", "assignee"])
     return task

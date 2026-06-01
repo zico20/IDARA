@@ -10,10 +10,13 @@ function task(id: number, columnId: number): Task {
     description: null,
     due_date: null,
     priority: "medium",
+    type: "task",
     position: id * 1000,
     created_at: "2026-01-01T00:00:00Z",
     updated_at: "2026-01-01T00:00:00Z",
     labels: [],
+    assignee_id: null,
+    assignee: null,
     checklist_done: 0,
     checklist_total: 0,
   };

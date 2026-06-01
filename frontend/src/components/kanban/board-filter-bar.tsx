@@ -7,9 +7,10 @@ import { Select } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useT } from "@/lib/i18n";
 import type { MessageKey } from "@/lib/i18n";
-import type { Label as LabelType, Priority } from "@/lib/types";
+import type { BoardMember, Label as LabelType, Priority } from "@/lib/types";
 import type { DueStatus } from "@/lib/due-status";
 import type { SortMode } from "@/lib/task-filter-sort";
+import { TASK_TYPES, TASK_TYPE_META } from "@/lib/task-type";
 import { useBoardViewStore } from "@/stores/board-view-store";
 
 const PRIORITIES: Priority[] = ["high", "medium", "low"];
@@ -69,14 +70,21 @@ function Chip({
 interface BoardFilterBarProps {
   boardId: number;
   labels: LabelType[];
+  members?: BoardMember[];
 }
 
-export function BoardFilterBar({ boardId, labels }: BoardFilterBarProps) {
+export function BoardFilterBar({
+  boardId,
+  labels,
+  members = [],
+}: BoardFilterBarProps) {
   const t = useT();
   const view = useBoardViewStore((s) => s.byBoard[boardId]);
   const toggleLabel = useBoardViewStore((s) => s.toggleLabel);
   const togglePriority = useBoardViewStore((s) => s.togglePriority);
   const toggleDue = useBoardViewStore((s) => s.toggleDue);
+  const toggleAssignee = useBoardViewStore((s) => s.toggleAssignee);
+  const toggleType = useBoardViewStore((s) => s.toggleType);
   const setSort = useBoardViewStore((s) => s.setSort);
   const clear = useBoardViewStore((s) => s.clear);
   const [open, setOpen] = useState(false);
@@ -84,12 +92,16 @@ export function BoardFilterBar({ boardId, labels }: BoardFilterBarProps) {
   const labelFilter = view?.labelFilter ?? [];
   const priorityFilter = view?.priorityFilter ?? [];
   const dueFilter = view?.dueFilter ?? [];
+  const assigneeFilter = view?.assigneeFilter ?? [];
+  const typeFilter = view?.typeFilter ?? [];
   const sort = view?.sort ?? "manual";
 
   const activeCount =
     labelFilter.length +
     priorityFilter.length +
     dueFilter.length +
+    assigneeFilter.length +
+    typeFilter.length +
     (sort !== "manual" ? 1 : 0);
 
   return (
@@ -173,6 +185,35 @@ export function BoardFilterBar({ boardId, labels }: BoardFilterBarProps) {
               </Chip>
             ))}
           </FilterRow>
+
+          {/* Type */}
+          <FilterRow label={t("filter.type")}>
+            {TASK_TYPES.map((ty) => (
+              <Chip
+                key={ty}
+                active={typeFilter.includes(ty)}
+                onClick={() => toggleType(boardId, ty)}
+                color={TASK_TYPE_META[ty].color}
+              >
+                {t(TASK_TYPE_META[ty].labelKey)}
+              </Chip>
+            ))}
+          </FilterRow>
+
+          {/* Assignee */}
+          {members.length > 0 && (
+            <FilterRow label={t("filter.assignee")}>
+              {members.map((m) => (
+                <Chip
+                  key={m.user.id}
+                  active={assigneeFilter.includes(m.user.id)}
+                  onClick={() => toggleAssignee(boardId, m.user.id)}
+                >
+                  {m.user.name}
+                </Chip>
+              ))}
+            </FilterRow>
+          )}
 
           {/* Labels */}
           {labels.length > 0 && (

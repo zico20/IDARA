@@ -12,6 +12,9 @@ import {
   Settings,
   Tags,
   Activity,
+  LayoutGrid,
+  BarChart3,
+  CalendarDays,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +22,8 @@ import { EmptyState, FullPageSpinner } from "@/components/ui/misc";
 import { KanbanBoard } from "@/components/kanban/kanban-board";
 import { BoardSnapshotSkeleton } from "@/components/skeletons/board-snapshot-skeleton";
 import { BoardFilterBar } from "@/components/kanban/board-filter-bar";
+import { AnalyticsView } from "@/components/analytics/analytics-view";
+import { CalendarView } from "@/components/calendar/calendar-view";
 import { TaskDialog } from "@/components/kanban/task-dialog";
 import { AddColumnDialog } from "@/components/kanban/add-column-dialog";
 import { ActivityDrawer } from "@/components/kanban/activity-drawer";
@@ -68,6 +73,12 @@ export default function BoardPage() {
   // Client UI state (Zustand) — activity panel visibility, persisted locally.
   const activityPanelOpen = useUiStore((s) => s.activityPanelOpen);
   const toggleActivityPanel = useUiStore((s) => s.toggleActivityPanel);
+
+  // Which board view is shown (Board | Analytics | Calendar). Client-only,
+  // additive — default Board keeps the desktop settled state unchanged.
+  const [boardView, setBoardView] = useState<"board" | "analytics" | "calendar">(
+    "board",
+  );
 
   // Dialog state
   const [search, setSearch] = useState("");
@@ -186,35 +197,74 @@ export default function BoardPage() {
         </div>
       </header>
 
-      {/* Toolbar row: search + presence */}
+      {/* Toolbar row: search + view switcher + presence */}
       <div className="flex flex-shrink-0 items-center gap-3 px-4 pt-4 sm:px-6 sm:pt-5">
-        <div className="relative min-w-0 flex-1 sm:flex-none">
-          <Search
-            size={14}
-            className="pointer-events-none absolute start-2.5 top-1/2 -translate-y-1/2 text-fg-subtle"
-          />
-          <Input
-            ref={searchRef}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder={t("board.search")}
-            className="w-full ps-8 sm:w-56"
-          />
+        {boardView === "board" && (
+          <div className="relative min-w-0 flex-1 sm:flex-none">
+            <Search
+              size={14}
+              className="pointer-events-none absolute start-2.5 top-1/2 -translate-y-1/2 text-fg-subtle"
+            />
+            <Input
+              ref={searchRef}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder={t("board.search")}
+              className="w-full ps-8 sm:w-56"
+            />
+          </div>
+        )}
+        <div className="inline-flex shrink-0 rounded-lg border border-border bg-bg-subtle p-0.5">
+          {(
+            [
+              { key: "board", icon: LayoutGrid, label: t("view.board") },
+              { key: "analytics", icon: BarChart3, label: t("view.analytics") },
+              { key: "calendar", icon: CalendarDays, label: t("view.calendar") },
+            ] as const
+          ).map((v) => (
+            <button
+              key={v.key}
+              type="button"
+              onClick={() => setBoardView(v.key)}
+              aria-pressed={boardView === v.key}
+              className={
+                "inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[12.5px] font-medium transition-colors motion-reduce:transition-none " +
+                (boardView === v.key
+                  ? "bg-bg-elevated text-fg shadow-glass-sm"
+                  : "text-fg-muted hover:text-fg")
+              }
+            >
+              <v.icon size={14} />
+              <span className="max-sm:hidden">{v.label}</span>
+            </button>
+          ))}
         </div>
         <div className="hidden flex-1 sm:block" />
         <PresenceBar viewers={viewers} connected={connected} />
       </div>
 
-      {/* Filter & sort bar (additive; below the toolbar). Hidden during load. */}
-      {!snapLoading && hasColumns && (
+      {/* Filter & sort bar (board view only; additive). Hidden during load. */}
+      {boardView === "board" && !snapLoading && hasColumns && (
         <div className="flex-shrink-0 px-4 pt-3 sm:px-6">
-          <BoardFilterBar boardId={boardId} labels={labels} />
+          <BoardFilterBar boardId={boardId} labels={labels} members={board.members} />
         </div>
       )}
 
-      {/* Kanban surface (full width) */}
-      <div className="min-h-0 flex-1 overflow-hidden px-4 py-4 sm:px-6 sm:py-5">
-        {snapLoading ? (
+      {/* Surface (full width): Board | Analytics | Calendar */}
+      <div
+        className={
+          "min-h-0 flex-1 px-4 py-4 sm:px-6 sm:py-5 " +
+          (boardView === "board" ? "overflow-hidden" : "overflow-y-auto")
+        }
+      >
+        {boardView === "analytics" ? (
+          <AnalyticsView snapshot={snapshot} teamSize={board.members.length} />
+        ) : boardView === "calendar" ? (
+          <CalendarView
+            snapshot={snapshot}
+            onOpenTask={(task) => setTaskDialog({ task })}
+          />
+        ) : snapLoading ? (
           <BoardSnapshotSkeleton />
         ) : !hasColumns ? (
           <EmptyState
@@ -265,6 +315,7 @@ export default function BoardPage() {
           columnId={taskDialog.columnId}
           task={taskDialog.task}
           labels={labels}
+          members={board.members}
           canEdit={!!canEdit}
           isOwner={isOwner}
           currentUserId={user?.id}

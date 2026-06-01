@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.errors import ConflictError, ForbiddenError, NotFoundError
 from app.models.board import Board, BoardRole
 from app.models.user import User
-from app.repositories import board_repo, column_repo, user_repo
+from app.repositories import board_repo, column_repo, task_repo, user_repo
 from app.schemas.board import BoardCreate, BoardUpdate
 
 
@@ -100,5 +100,10 @@ async def remove_member(
             "The board owner cannot be removed.", code="owner_protected"
         )
     removed_user = member.user
+    # Unassign any of this board's tasks assigned to the departing member so the
+    # tasks survive but become unassigned (FR-007).
+    await task_repo.clear_assignee_for_board_user(
+        db, board_id=board.id, user_id=user_id
+    )
     await board_repo.remove_member(db, member=member)
     return removed_user

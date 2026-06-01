@@ -18,10 +18,13 @@ function task(
     description: null,
     due_date: null,
     priority,
+    type: "task",
     position,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
     labels: [],
+    assignee_id: null,
+    assignee: null,
     checklist_done: 0,
     checklist_total: 0,
   };

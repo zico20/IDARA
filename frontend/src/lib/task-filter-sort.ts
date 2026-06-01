@@ -1,6 +1,6 @@
 // Pure, presentation-only filtering + sorting over the board snapshot. Never
 // mutates server data; never shared between members. Unit-tested in isolation.
-import type { ColumnWithTasks, Priority, Task } from "./types";
+import type { ColumnWithTasks, Priority, Task, TaskType } from "./types";
 import { dueInfo, type DueStatus } from "./due-status";
 
 export type SortMode = "manual" | "due" | "priority" | "created";
@@ -9,6 +9,8 @@ export interface ViewState {
   labelFilter: number[];
   priorityFilter: Priority[];
   dueFilter: DueStatus[];
+  assigneeFilter: number[];
+  typeFilter: TaskType[];
   sort: SortMode;
 }
 
@@ -16,6 +18,8 @@ export const EMPTY_VIEW: ViewState = {
   labelFilter: [],
   priorityFilter: [],
   dueFilter: [],
+  assigneeFilter: [],
+  typeFilter: [],
   sort: "manual",
 };
 
@@ -49,6 +53,15 @@ export function taskMatches(
   if (view.dueFilter.length > 0) {
     const status = dueInfo(task.due_date, now).status;
     if (!view.dueFilter.includes(status)) return false;
+  }
+
+  if (view.assigneeFilter.length > 0) {
+    if (task.assignee_id === null) return false;
+    if (!view.assigneeFilter.includes(task.assignee_id)) return false;
+  }
+
+  if (view.typeFilter.length > 0 && !view.typeFilter.includes(task.type)) {
+    return false;
   }
 
   return true;
@@ -102,6 +115,8 @@ export function isViewActive(view: ViewState): boolean {
     view.labelFilter.length > 0 ||
     view.priorityFilter.length > 0 ||
     view.dueFilter.length > 0 ||
+    view.assigneeFilter.length > 0 ||
+    view.typeFilter.length > 0 ||
     view.sort !== "manual"
   );
 }

@@ -17,7 +17,13 @@ import { Select } from "@/components/ui/select";
 import { DateField } from "@/components/ui/date-field";
 import { cn } from "@/lib/utils";
 import { useT } from "@/lib/i18n";
-import type { Label as LabelType, Priority, Task } from "@/lib/types";
+import type {
+  BoardMember,
+  Label as LabelType,
+  Priority,
+  Task,
+} from "@/lib/types";
+import { TASK_TYPES, TASK_TYPE_META } from "@/lib/task-type";
 import {
   useCreateTask,
   useDeleteTask,
@@ -31,6 +37,9 @@ const schema = z.object({
   description: z.string().optional(),
   due_date: z.string().optional(),
   priority: z.enum(["low", "medium", "high"]),
+  type: z.enum(["task", "feature", "improvement"]),
+  // Stored as a string in the form ("" = unassigned); coerced on submit.
+  assignee_id: z.string().optional(),
 });
 type FormValues = z.infer<typeof schema>;
 
@@ -44,6 +53,7 @@ interface TaskDialogProps {
   columnId?: number;
   task?: Task | null;
   labels: LabelType[];
+  members?: BoardMember[];
   canEdit?: boolean;
   isOwner?: boolean;
   currentUserId?: number;
@@ -56,6 +66,7 @@ export function TaskDialog({
   columnId,
   task,
   labels,
+  members = [],
   canEdit = true,
   isOwner = false,
   currentUserId,
@@ -74,7 +85,7 @@ export function TaskDialog({
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { priority: "medium" },
+    defaultValues: { priority: "medium", type: "task", assignee_id: "" },
   });
 
   useEffect(() => {
@@ -84,6 +95,8 @@ export function TaskDialog({
         description: task?.description ?? "",
         due_date: task?.due_date ? task.due_date.slice(0, 10) : "",
         priority: task?.priority ?? "medium",
+        type: task?.type ?? "task",
+        assignee_id: task?.assignee_id != null ? String(task.assignee_id) : "",
       });
       setSelectedLabels(task?.labels.map((l) => l.id) ?? []);
     }
@@ -102,6 +115,11 @@ export function TaskDialog({
         ? new Date(values.due_date).toISOString()
         : null,
       priority: values.priority,
+      type: values.type,
+      assignee_id:
+        values.assignee_id && values.assignee_id !== ""
+          ? Number(values.assignee_id)
+          : null,
       label_ids: selectedLabels,
     };
 
@@ -192,7 +210,12 @@ export function TaskDialog({
           <div className="space-y-4 border-t border-border/70 bg-bg/30 p-5 md:border-s md:border-t-0">
             <div>
               <Label htmlFor="priority">{t("task.priority")}</Label>
-              <Select id="priority" className="mt-1" {...register("priority")}>
+              <Select
+                id="priority"
+                className="mt-1"
+                disabled={!canEdit}
+                {...register("priority")}
+              >
                 {PRIORITIES.map((p) => (
                   <option key={p} value={p}>
                     {t(`priority.${p}`)}
@@ -202,8 +225,41 @@ export function TaskDialog({
             </div>
 
             <div>
+              <Label htmlFor="type">{t("task.type")}</Label>
+              <Select
+                id="type"
+                className="mt-1"
+                disabled={!canEdit}
+                {...register("type")}
+              >
+                {TASK_TYPES.map((ty) => (
+                  <option key={ty} value={ty}>
+                    {t(TASK_TYPE_META[ty].labelKey)}
+                  </option>
+                ))}
+              </Select>
+            </div>
+
+            <div>
+              <Label htmlFor="assignee_id">{t("task.assignee")}</Label>
+              <Select
+                id="assignee_id"
+                className="mt-1"
+                disabled={!canEdit}
+                {...register("assignee_id")}
+              >
+                <option value="">{t("task.unassigned")}</option>
+                {members.map((m) => (
+                  <option key={m.user.id} value={String(m.user.id)}>
+                    {m.user.name}
+                  </option>
+                ))}
+              </Select>
+            </div>
+
+            <div>
               <Label htmlFor="due_date">{t("task.dueDate")}</Label>
-              <DateField id="due_date" {...register("due_date")} />
+              <DateField id="due_date" disabled={!canEdit} {...register("due_date")} />
             </div>
 
             <div>

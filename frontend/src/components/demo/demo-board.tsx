@@ -115,10 +115,13 @@ export function DemoBoard() {
       description: null,
       due_date: null,
       priority: priorities[Math.floor(title.length % 3)],
+      type: "task",
       position: 0,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       labels: [],
+      assignee_id: null,
+      assignee: null,
       checklist_done: 0,
       checklist_total: 0,
     };

@@ -203,6 +203,9 @@ export const en = {
   "task.descriptionPlaceholder": "Add more detail…",
   "task.dueDate": "Due date",
   "task.priority": "Priority",
+  "task.type": "Type",
+  "task.assignee": "Assignee",
+  "task.unassigned": "Unassigned",
   "task.labels": "Labels",
   "task.noLabels": "No labels yet.",
   "task.manageLabels": "Manage labels",
@@ -216,6 +219,9 @@ export const en = {
   "priority.low": "Low",
   "priority.medium": "Medium",
   "priority.high": "High",
+  "type.task": "Task",
+  "type.feature": "Feature",
+  "type.improvement": "Improvement",
 
   // --- Checklist (subtasks) ---
   "checklist.title": "Checklist",
@@ -245,6 +251,8 @@ export const en = {
   "filter.label": "Label",
   "filter.priority": "Priority",
   "filter.due": "Due",
+  "filter.type": "Type",
+  "filter.assignee": "Assignee",
   "filter.clear": "Clear filters",
   "filter.none": "No filters",
   "filter.empty": "No matching tasks",
@@ -254,6 +262,26 @@ export const en = {
   "sort.priority": "Priority",
   "sort.created": "Created",
   "sort.activeHint": "Drag is paused while a sort is active",
+
+  // --- Board views ---
+  "view.board": "Board",
+  "view.analytics": "Analytics",
+  "view.calendar": "Calendar",
+
+  // --- Analytics ---
+  "analytics.completionRate": "Completion rate",
+  "analytics.active": "Active tasks",
+  "analytics.overdue": "Overdue tasks",
+  "analytics.teamSize": "Team size",
+  "analytics.byStatus": "Tasks by status",
+  "analytics.byPriority": "Tasks by priority",
+  "analytics.byType": "Tasks by type",
+  "analytics.empty": "No data yet",
+
+  // --- Calendar ---
+  "calendar.prevMonth": "Previous month",
+  "calendar.nextMonth": "Next month",
+  "calendar.today": "Today",
 
   // --- Due status ---
   "due.overdue": "Overdue",
@@ -523,6 +551,9 @@ export const ar: Dictionary = {
   "task.descriptionPlaceholder": "أضف تفاصيل أكثر…",
   "task.dueDate": "تاريخ الاستحقاق",
   "task.priority": "الأولوية",
+  "task.type": "النوع",
+  "task.assignee": "المسؤول",
+  "task.unassigned": "غير مُسنَدة",
   "task.labels": "التصنيفات",
   "task.noLabels": "لا توجد تصنيفات بعد.",
   "task.manageLabels": "إدارة التصنيفات",
@@ -536,6 +567,9 @@ export const ar: Dictionary = {
   "priority.low": "منخفضة",
   "priority.medium": "متوسطة",
   "priority.high": "عالية",
+  "type.task": "مهمة",
+  "type.feature": "ميزة",
+  "type.improvement": "تحسين",
 
   // --- Checklist (subtasks) ---
   "checklist.title": "قائمة التحقق",
@@ -565,6 +599,8 @@ export const ar: Dictionary = {
   "filter.label": "التصنيف",
   "filter.priority": "الأولوية",
   "filter.due": "الاستحقاق",
+  "filter.type": "النوع",
+  "filter.assignee": "المسؤول",
   "filter.clear": "مسح الفلاتر",
   "filter.none": "بدون فلاتر",
   "filter.empty": "لا توجد مهام مطابقة",
@@ -574,6 +610,26 @@ export const ar: Dictionary = {
   "sort.priority": "الأولوية",
   "sort.created": "تاريخ الإنشاء",
   "sort.activeHint": "السحب متوقف أثناء تفعيل الفرز",
+
+  // --- Board views ---
+  "view.board": "اللوحة",
+  "view.analytics": "التحليلات",
+  "view.calendar": "التقويم",
+
+  // --- Analytics ---
+  "analytics.completionRate": "نسبة الإنجاز",
+  "analytics.active": "المهام النشطة",
+  "analytics.overdue": "المهام المتأخرة",
+  "analytics.teamSize": "حجم الفريق",
+  "analytics.byStatus": "المهام حسب الحالة",
+  "analytics.byPriority": "المهام حسب الأولوية",
+  "analytics.byType": "المهام حسب النوع",
+  "analytics.empty": "لا توجد بيانات بعد",
+
+  // --- Calendar ---
+  "calendar.prevMonth": "الشهر السابق",
+  "calendar.nextMonth": "الشهر التالي",
+  "calendar.today": "اليوم",
 
   // --- Due status ---
   "due.overdue": "متأخّر",

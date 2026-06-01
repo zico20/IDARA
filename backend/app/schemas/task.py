@@ -5,7 +5,8 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from app.models.task import TaskPriority
+from app.models.task import TaskPriority, TaskType
+from app.schemas.auth import UserPublic
 from app.schemas.label import LabelPublic
 
 
@@ -14,6 +15,8 @@ class TaskCreate(BaseModel):
     description: str | None = None
     due_date: datetime | None = None
     priority: TaskPriority = TaskPriority.medium
+    type: TaskType = TaskType.task
+    assignee_id: int | None = None
     label_ids: list[int] = []
 
 
@@ -22,6 +25,8 @@ class TaskUpdate(BaseModel):
     description: str | None = None
     due_date: datetime | None = None
     priority: TaskPriority | None = None
+    type: TaskType | None = None
+    assignee_id: int | None = None
     label_ids: list[int] | None = None
 
 
@@ -41,10 +46,13 @@ class TaskPublic(BaseModel):
     description: str | None
     due_date: datetime | None
     priority: TaskPriority
+    type: TaskType
     position: int
     created_at: datetime
     updated_at: datetime
     labels: list[LabelPublic] = []
+    assignee_id: int | None = None
+    assignee: UserPublic | None = None
     # Checklist progress summary for the board card (derived, not stored).
     checklist_done: int = 0
     checklist_total: int = 0
@@ -71,10 +79,13 @@ class TaskPublic(BaseModel):
                 "description": data.description,
                 "due_date": data.due_date,
                 "priority": data.priority,
+                "type": data.type,
                 "position": data.position,
                 "created_at": data.created_at,
                 "updated_at": data.updated_at,
                 "labels": list(data.labels),
+                "assignee_id": data.assignee_id,
+                "assignee": data.assignee,
                 "checklist_done": done,
                 "checklist_total": len(items),
             }

@@ -15,12 +15,19 @@ if TYPE_CHECKING:
     from app.models.column import Column
     from app.models.comment import Comment
     from app.models.label import Label
+    from app.models.user import User
 
 
 class TaskPriority(str, enum.Enum):
     low = "low"
     medium = "medium"
     high = "high"
+
+
+class TaskType(str, enum.Enum):
+    task = "task"
+    feature = "feature"
+    improvement = "improvement"
 
 
 class Task(Base, TimestampMixin):
@@ -40,9 +47,20 @@ class Task(Base, TimestampMixin):
         default=TaskPriority.medium,
         nullable=False,
     )
+    type: Mapped[TaskType] = mapped_column(
+        SAEnum(TaskType, name="task_type"),
+        default=TaskType.task,
+        nullable=False,
+    )
     position: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    # Optional assignee — one of the board's members. SET NULL on user removal so
+    # the task survives a member leaving / an account being deleted (FR-007).
+    assignee_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), index=True, nullable=True
+    )
 
     column: Mapped[Column] = relationship(back_populates="tasks")
+    assignee: Mapped[User | None] = relationship(lazy="selectin")
     labels: Mapped[list[Label]] = relationship(
         secondary="task_labels", back_populates="tasks"
     )

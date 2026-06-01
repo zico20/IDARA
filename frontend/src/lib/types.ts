@@ -1,6 +1,7 @@
 // Shared API types mirroring the backend Pydantic schemas.
 
 export type Priority = "low" | "medium" | "high";
+export type TaskType = "task" | "feature" | "improvement";
 export type BoardRole = "owner" | "editor" | "viewer";
 
 export interface User {
@@ -46,10 +47,13 @@ export interface Task {
   description: string | null;
   due_date: string | null;
   priority: Priority;
+  type: TaskType;
   position: number;
   created_at: string;
   updated_at: string;
   labels: Label[];
+  assignee_id: number | null;
+  assignee: User | null;
   checklist_done: number;
   checklist_total: number;
 }

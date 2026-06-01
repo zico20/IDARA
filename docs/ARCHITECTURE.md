@@ -49,12 +49,13 @@ erDiagram
     TASK ||--o{ CHECKLIST_ITEM : "has"
     TASK ||--o{ COMMENT : "has"
     USER ||--o{ COMMENT : authors
+    USER ||--o{ TASK : "assigned (SET NULL)"
 
     USER { int id PK; string email UK; string password_hash; string name; string avatar_url }
     BOARD { int id PK; int owner_id FK; string name; string description; string color }
     BOARD_MEMBER { int id PK; int board_id FK; int user_id FK; enum role }
     COLUMN { int id PK; int board_id FK; string name; int position }
-    TASK { int id PK; int column_id FK; string title; text description; datetime due_date; enum priority; int position }
+    TASK { int id PK; int column_id FK; string title; text description; datetime due_date; enum priority; enum type; int assignee_id FK; int position }
     LABEL { int id PK; int board_id FK; string name; string color }
     CHECKLIST_ITEM { int id PK; int task_id FK; string content; bool is_done; int position }
     COMMENT { int id PK; int task_id FK; int user_id FK; text content; datetime created_at }
@@ -70,6 +71,18 @@ state (Zustand, `board-view-store`) layered over the snapshot via the pure
 `lib/task-filter-sort.ts` helper — they never hit the server and never affect other
 members. Due-status badges are computed client-side from `due_date` vs the viewer's local
 day (`lib/due-status.ts`).
+
+A task also carries an optional **assignee** (`assignee_id` → `users.id`, `ON DELETE SET
+NULL`; removing a member from a board also clears their assignments so the task survives
+unassigned) and a **type** (`task`/`feature`/`improvement`, default `task`). The assignee
+must be a board member — validated in `task_service` (422 `invalid_assignee`). Both ride
+the existing `task.created`/`task.updated` broadcasts (no new WS events). Two additional
+**client-only board views** sit over the same snapshot: an **Analytics** view (completion
+rate, active/overdue counts, team size, and CSS/SVG charts by status/priority/type;
+computed by the pure `lib/analytics.ts` — "complete" = the board's last column) and a
+monthly **Calendar** view (`lib/calendar.ts`, built on the existing `date-fns`) that places
+due-dated tasks on their day and opens the existing task dialog on click. Neither adds a
+server endpoint; the assignee/type filters extend the same `board-view-store`.
 
 ### Ordering & drag-drop positions
 

@@ -34,6 +34,8 @@ async def list_for_board_with_tasks(db: AsyncSession, board_id: int) -> list[Col
             # Eager-load checklist items so each task's progress summary
             # (done/total) is computed without a per-task lazy load (no N+1).
             selectinload(Column.tasks).selectinload(Task.checklist_items),
+            # Eager-load the assignee for the card avatar (no N+1).
+            selectinload(Column.tasks).selectinload(Task.assignee),
         )
         .order_by(Column.position, Column.id)
     )

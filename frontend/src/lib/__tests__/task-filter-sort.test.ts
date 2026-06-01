@@ -22,10 +22,13 @@ function task(over: Partial<Task> & { id: number }): Task {
     description: null,
     due_date: over.due_date ?? null,
     priority: over.priority ?? "medium",
+    type: over.type ?? "task",
     position: over.position ?? over.id * 1000,
     created_at: over.created_at ?? "2026-05-01T00:00:00Z",
     updated_at: "2026-05-01T00:00:00Z",
     labels: over.labels ?? [],
+    assignee_id: over.assignee_id ?? null,
+    assignee: over.assignee ?? null,
     checklist_done: 0,
     checklist_total: 0,
   };
@@ -85,6 +88,37 @@ describe("taskMatches", () => {
     expect(taskMatches(t1, EMPTY_VIEW, "login", NOW)).toBe(true);
     expect(taskMatches(t1, EMPTY_VIEW, "bug", NOW)).toBe(true); // label name
     expect(taskMatches(t1, EMPTY_VIEW, "zzz", NOW)).toBe(false);
+  });
+
+  it("filters by assignee (empty filter = all)", () => {
+    const assigned = task({ id: 20, assignee_id: 7 });
+    const unassigned = task({ id: 21, assignee_id: null });
+    // Empty assignee filter matches everything.
+    expect(taskMatches(assigned, EMPTY_VIEW, "", NOW)).toBe(true);
+    expect(taskMatches(unassigned, EMPTY_VIEW, "", NOW)).toBe(true);
+    // Filtering to user 7 keeps only their tasks.
+    const view: ViewState = { ...EMPTY_VIEW, assigneeFilter: [7] };
+    expect(taskMatches(assigned, view, "", NOW)).toBe(true);
+    expect(taskMatches(unassigned, view, "", NOW)).toBe(false);
+  });
+
+  it("filters by type (empty filter = all)", () => {
+    const feature = task({ id: 30, type: "feature" });
+    const plain = task({ id: 31, type: "task" });
+    const view: ViewState = { ...EMPTY_VIEW, typeFilter: ["feature"] };
+    expect(taskMatches(feature, view, "", NOW)).toBe(true);
+    expect(taskMatches(plain, view, "", NOW)).toBe(false);
+    expect(taskMatches(plain, EMPTY_VIEW, "", NOW)).toBe(true);
+  });
+
+  it("combines assignee + type conjunctively", () => {
+    const t = task({ id: 40, type: "feature", assignee_id: 7 });
+    expect(
+      taskMatches(t, { ...EMPTY_VIEW, typeFilter: ["feature"], assigneeFilter: [7] }, "", NOW),
+    ).toBe(true);
+    expect(
+      taskMatches(t, { ...EMPTY_VIEW, typeFilter: ["feature"], assigneeFilter: [8] }, "", NOW),
+    ).toBe(false);
   });
 });
 
@@ -156,5 +190,7 @@ describe("isViewActive", () => {
   it("is true when any filter or non-manual sort is set", () => {
     expect(isViewActive({ ...EMPTY_VIEW, sort: "due" })).toBe(true);
     expect(isViewActive({ ...EMPTY_VIEW, priorityFilter: ["high"] })).toBe(true);
+    expect(isViewActive({ ...EMPTY_VIEW, assigneeFilter: [7] })).toBe(true);
+    expect(isViewActive({ ...EMPTY_VIEW, typeFilter: ["feature"] })).toBe(true);
   });
 });
