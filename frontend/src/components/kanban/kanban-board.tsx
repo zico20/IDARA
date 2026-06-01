@@ -182,7 +182,9 @@ export function KanbanBoard({
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
     >
-      <div className="flex h-full gap-4 overflow-x-auto pb-4">
+      {/* Desktop/tablet: horizontal kanban (unchanged). Mobile (<768px): stack
+          columns vertically so the board scrolls down, not sideways. */}
+      <div className="flex h-full flex-col gap-4 overflow-y-auto pb-4 md:flex-row md:items-start md:overflow-x-auto md:overflow-y-hidden">
         {columns.map((column) => (
           <KanbanColumn
             key={column.id}
@@ -199,7 +201,7 @@ export function KanbanBoard({
         ))}
 
         {canEdit && (
-          <div className="w-72 shrink-0">
+          <div className="w-full shrink-0 md:w-72">
             <Button
               variant="secondary"
               className="w-full justify-start"

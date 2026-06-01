@@ -110,7 +110,7 @@ export function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
       <div className="mt-auto flex flex-col gap-1 border-t border-border/60 pt-2.5">
         <div className="flex items-center gap-1.5 px-1.5">
           <ThemeSwitcher />
-          <LanguageSwitcher />
+          <LanguageSwitcher iconOnly />
         </div>
         {user && (
           <div className="flex items-center gap-2.5 rounded-md px-2.5 py-2">

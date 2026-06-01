@@ -49,7 +49,9 @@ export function KanbanColumn({
   };
 
   return (
-    <div className="flex h-full w-72 shrink-0 flex-col">
+    // Mobile (<768px): full-width, natural height (board scrolls vertically).
+    // Desktop/tablet (md+): fixed 288px column, capped to the board height.
+    <div className="flex w-full shrink-0 flex-col md:max-h-full md:w-72">
       <div className="mb-2 flex items-center justify-between px-1">
         {editing ? (
           <div className="flex flex-1 items-center gap-1">
@@ -121,7 +123,10 @@ export function KanbanColumn({
       <div
         ref={setNodeRef}
         className={cn(
-          "flex min-h-[60px] flex-1 flex-col gap-2 overflow-y-auto rounded-xl border border-transparent bg-bg-subtle/60 p-2 transition-colors",
+          // Hug the tasks: size to content (small min for an empty drop zone).
+          // On md+ the column is height-capped so its tasks scroll internally;
+          // on mobile the whole board scrolls, so no nested scroll here.
+          "flex min-h-[52px] flex-col gap-2 rounded-xl border border-transparent bg-bg-subtle/60 p-2 transition-colors md:overflow-y-auto",
           isOver && "border-accent/40 bg-bg-subtle",
         )}
       >

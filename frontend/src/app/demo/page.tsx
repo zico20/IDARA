@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutGrid, Info } from "lucide-react";
+import { LayoutGrid, Info, LogIn } from "lucide-react";
 import { DemoBoard } from "@/components/demo/demo-board";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -23,20 +23,19 @@ export default function DemoPage() {
             </span>
             <span className="font-semibold">TaskFlow</span>
           </Link>
-          <div className="flex items-center gap-2">
+          {/* Consistent square icon buttons (theme · language · login) — icon-only
+              so the bar never overflows on small phones. Signup is reachable from
+              the trial banner / board CTA below. */}
+          <div className="flex items-center gap-1.5">
             <ThemeSwitcher />
-            <LanguageSwitcher />
+            <LanguageSwitcher iconOnly />
             <Link
               href="/login"
-              className="rounded-md px-3 py-1.5 text-sm text-fg-muted hover:bg-bg-muted hover:text-fg"
+              title={t("landing.nav.login")}
+              aria-label={t("landing.nav.login")}
+              className="glass-clear inline-flex h-9 w-9 items-center justify-center rounded-md text-fg-muted transition-colors hover:text-fg"
             >
-              {t("landing.nav.login")}
-            </Link>
-            <Link
-              href="/signup"
-              className="rounded-md bg-gradient-to-b from-accent-hover to-accent text-bg shadow-[0_4px_14px_-4px_rgb(var(--accent)/0.5),inset_0_1px_0_rgba(255,255,255,0.35)] hover:brightness-[1.07] px-4 py-1.5 text-sm font-semibold transition"
-            >
-              {t("demo.signupToSave")}
+              <LogIn size={16} className="rtl:rotate-180" />
             </Link>
           </div>
         </div>

@@ -9,6 +9,7 @@ import {
   Activity,
   ArrowRight,
   Check,
+  LogIn,
 } from "lucide-react";
 import { useT } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -47,20 +48,19 @@ export function LandingPage() {
             </span>
             <span className="text-lg font-semibold">{t("common.appName")}</span>
           </div>
-          <nav className="flex items-center gap-2">
+          {/* Compact, consistent square icon buttons (theme · language · login).
+              Icon-only so the bar never overflows on small phones. Signup stays
+              reachable from the hero/CTA buttons below. */}
+          <nav className="flex items-center gap-1.5">
             <ThemeSwitcher />
-            <LanguageSwitcher />
+            <LanguageSwitcher iconOnly />
             <Link
               href="/login"
-              className="rounded-md px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:bg-bg-muted hover:text-fg"
+              title={t("landing.nav.login")}
+              aria-label={t("landing.nav.login")}
+              className="glass-clear inline-flex h-9 w-9 items-center justify-center rounded-md text-fg-muted transition-colors hover:text-fg"
             >
-              {t("landing.nav.login")}
-            </Link>
-            <Link
-              href="/signup"
-              className="rounded-md bg-gradient-to-b from-accent-hover to-accent text-bg shadow-[0_4px_14px_-4px_rgb(var(--accent)/0.5),inset_0_1px_0_rgba(255,255,255,0.35)] hover:brightness-[1.07] px-4 py-2 text-sm font-semibold transition"
-            >
-              {t("landing.nav.start")}
+              <LogIn size={16} className="rtl:rotate-180" />
             </Link>
           </nav>
         </div>
@@ -75,8 +75,6 @@ export function LandingPage() {
           </span>
           <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-bold leading-tight sm:text-5xl">
             {t("landing.hero.title")}
-            <br />
-            <span className="text-accent">{t("landing.hero.titleAccent")}</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg text-fg-muted">
             {t("landing.hero.subtitle")}

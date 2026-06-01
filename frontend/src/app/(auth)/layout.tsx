@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, LayoutGrid } from "lucide-react";
+import { Home, LayoutGrid } from "lucide-react";
 import { useT } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -17,16 +17,18 @@ export default function AuthLayout({
     <div className="relative flex min-h-screen items-center justify-center px-4">
       <Backdrop />
       <div className="absolute inset-x-4 top-4 z-10 flex items-center justify-between">
+        {/* Consistent square icon buttons (home · theme · language). */}
         <Link
           href="/"
-          className="glass-clear inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm text-fg-muted transition-colors hover:text-fg"
+          title={t("common.home")}
+          aria-label={t("common.home")}
+          className="glass-clear inline-flex h-9 w-9 items-center justify-center rounded-md text-fg-muted transition-colors hover:text-fg"
         >
-          <ArrowLeft size={15} className="rtl:rotate-180" />
-          {t("common.home")}
+          <Home size={16} />
         </Link>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <ThemeSwitcher />
-          <LanguageSwitcher />
+          <LanguageSwitcher iconOnly />
         </div>
       </div>
       <div className="relative z-10 w-full max-w-sm animate-fade-in">
