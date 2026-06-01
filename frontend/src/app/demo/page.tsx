@@ -16,7 +16,7 @@ export default function DemoPage() {
       <Backdrop />
       {/* Top bar — floating glass capsule (detached pill, rounded all around). */}
       <header className="sticky top-0 z-30 px-4 pt-4">
-        <div className="glass-frost mx-auto flex h-14 max-w-7xl items-center justify-between rounded-2xl border border-border/60 px-4 sm:px-5">
+        <div className="glass-frost mx-auto flex h-16 max-w-6xl items-center justify-between rounded-2xl border border-border/60 px-4 sm:px-5">
           <Link href="/" className="flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-accent-subtle text-bg shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
               <LayoutGrid size={16} />
