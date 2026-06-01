@@ -16,7 +16,8 @@ export default function AuthLayout({
   return (
     <div className="relative flex min-h-screen items-center justify-center px-4">
       <Backdrop />
-      <div className="absolute inset-x-4 top-4 z-10 flex items-center justify-between">
+      {/* Floating glass capsule (matches the landing/demo top bar). */}
+      <div className="glass-frost absolute inset-x-4 top-4 z-10 flex h-14 items-center justify-between rounded-2xl border border-border/60 px-4 sm:px-5">
         {/* Consistent square icon buttons (home · theme · language). */}
         <Link
           href="/"
