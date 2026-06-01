@@ -14,10 +14,11 @@ export default function AuthLayout({
 }) {
   const t = useT();
   // Mobile (<md): start content below the floating top bar (it's absolute, so it
-  // doesn't reserve space) — pad the top and align to start so the logo never
-  // overlaps the bar. Desktop (>=md): vertically centered as before.
+  // doesn't reserve space) — pad the top so the logo never overlaps the bar, and
+  // pad the bottom so the card breathes above the browser chrome instead of
+  // sitting flush against the screen edge. Desktop (>=md): vertically centered.
   return (
-    <div className="relative flex min-h-screen justify-center px-4 max-md:items-start max-md:pt-24 md:items-center">
+    <div className="relative flex min-h-screen justify-center px-4 max-md:items-start max-md:pb-12 max-md:pt-24 md:items-center">
       <Backdrop />
       {/* Floating glass capsule (matches the landing/demo top bar). */}
       <div className="glass-frost absolute inset-x-4 top-4 z-10 flex h-14 items-center justify-between rounded-2xl border border-border/60 px-4 sm:px-5">
