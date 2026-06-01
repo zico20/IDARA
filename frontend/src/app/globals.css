@@ -257,7 +257,11 @@ video {
   }
 
   /* Brand aurora layer — sits behind content, gives the glass something
-     to refract. Kept subtle so solid work surfaces stay readable. */
+     to refract. Kept subtle so solid work surfaces stay readable.
+     Sizes use px-clamped radii (not raw %) so the glows stay rich and
+     concentrated on wide desktop viewports instead of washing out — on a
+     narrow phone the % already produced a visible bloom; on a 1920px screen
+     the same % spread the colour too thin to see. */
   .tf-aurora {
     position: fixed;
     inset: 0;
@@ -265,9 +269,16 @@ video {
     pointer-events: none;
     opacity: var(--aurora-opacity);
     background:
-      radial-gradient(45% 40% at 18% 10%, color-mix(in srgb, var(--aurora-1) 60%, transparent), transparent 70%),
-      radial-gradient(42% 38% at 85% 18%, color-mix(in srgb, var(--aurora-2) 50%, transparent), transparent 70%),
-      radial-gradient(50% 45% at 72% 95%, color-mix(in srgb, var(--aurora-3) 50%, transparent), transparent 72%);
+      radial-gradient(clamp(420px, 45%, 760px) clamp(360px, 40%, 620px) at 18% 8%, color-mix(in srgb, var(--aurora-1) 62%, transparent), transparent 70%),
+      radial-gradient(clamp(380px, 42%, 700px) clamp(320px, 38%, 560px) at 88% 16%, color-mix(in srgb, var(--aurora-2) 55%, transparent), transparent 70%),
+      radial-gradient(clamp(460px, 50%, 820px) clamp(380px, 45%, 640px) at 72% 96%, color-mix(in srgb, var(--aurora-3) 52%, transparent), transparent 72%);
+  }
+  /* On wide screens lift the overall intensity a touch so the bloom reads
+     clearly (matches the design mockup) without overpowering content. */
+  @media (min-width: 1024px) {
+    .tf-aurora {
+      opacity: calc(var(--aurora-opacity) + 0.18);
+    }
   }
 }
 
