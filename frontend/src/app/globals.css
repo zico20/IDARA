@@ -143,8 +143,8 @@ body {
      In a normal Safari tab env(safe-area-inset-top) is 0, so we fall back to a
      solid minimum; in an installed/standalone PWA the real inset (~47px) wins.
      `--safe-gap` is the extra breathing room added on top of that clearance. */
-  --safe-top: max(env(safe-area-inset-top), 2.75rem);
-  --safe-gap: 0.75rem;
+  --safe-top: max(env(safe-area-inset-top), 4rem);
+  --safe-gap: 1.5rem;
 }
 .pt-safe {
   padding-top: calc(
