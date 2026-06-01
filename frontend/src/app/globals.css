@@ -128,45 +128,6 @@ body {
   }
 }
 
-/* ------------------------------------------------------------
-   SAFE-AREA UTILITIES (edge-to-edge / notch & home-indicator)
-   Add the device safe-area inset ON TOP of any existing padding
-   so interactive chrome clears the clock/notch while the page
-   background still reaches the physical edge. On devices/desktop
-   with no inset, env(...) is ~0 — these reduce to just the gap.
-   `--safe-gap` keeps a comfortable breathing space between the top
-   bar and the system status bar (clock/signal/battery) instead of
-   sitting flush against it. Requires viewport-fit=cover.
-   ------------------------------------------------------------ */
-:root {
-  /* Comfortable clearance below the system status bar (clock/signal/battery).
-     In a normal Safari tab env(safe-area-inset-top) is 0, so we fall back to a
-     solid minimum; in an installed/standalone PWA the real inset (~47px) wins.
-     `--safe-gap` is the extra breathing room added on top of that clearance. */
-  --safe-top: max(env(safe-area-inset-top), 4rem);
-  --safe-gap: 1.5rem;
-}
-.pt-safe {
-  padding-top: calc(
-    max(var(--tw-safe-base-top, 0px), var(--safe-top)) + var(--safe-gap)
-  );
-}
-.pb-safe {
-  padding-bottom: max(var(--tw-safe-base-bottom, 0px), env(safe-area-inset-bottom));
-}
-/* Logical horizontal insets (RTL/LTR aware). */
-.ps-safe {
-  padding-inline-start: env(safe-area-inset-left);
-}
-.pe-safe {
-  padding-inline-end: env(safe-area-inset-right);
-}
-/* Convenience: top clearance (plus the gap) as a margin, for absolutely- or
-   sticky-positioned floating bars. */
-.mt-safe {
-  margin-top: calc(var(--safe-top) + var(--safe-gap));
-}
-
 /* Hover effects only where a real pointer can hover — prevents sticky
    hover states on touch devices. Non-hover (focus/active) feedback still
    applies everywhere. */

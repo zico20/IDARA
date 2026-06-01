@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import { Inter, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { ServiceWorkerRegistrar } from "@/components/pwa/service-worker-registrar";
-import { BG_DARK, BG_LIGHT } from "@/lib/pwa/colors";
 import {
   DEFAULT_LOCALE,
   LOCALE_COOKIE,
@@ -20,17 +19,12 @@ const arabic = IBM_Plex_Sans_Arabic({
   variable: "--font-arabic",
 });
 
-// Mobile viewport: render at device width with no forced zoom; cover the whole
-// screen (under the notch/status bar) so the app background reaches the edges,
-// and tint the status-bar area to match the page background per color scheme.
+// Mobile viewport: render at device width with no forced zoom (responsive
+// support). No viewport-fit/theme-color — the device's default (black) system
+// status bar is used, with the page laid out below it (no edge-to-edge).
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: BG_DARK },
-    { media: "(prefers-color-scheme: light)", color: BG_LIGHT },
-  ],
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -46,12 +40,12 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: "/icon.svg",
     },
     // Installable PWA / iOS standalone behavior. The manifest is auto-linked by
-    // Next from app/manifest.ts; here we add the Apple-specific hints so the app
-    // launches full-screen and paints under the status bar.
+    // Next from app/manifest.ts. "default" keeps the normal opaque (black) status
+    // bar — the page lays out below it, not under it (no edge-to-edge).
     appleWebApp: {
       capable: true,
       title: appName,
-      statusBarStyle: "black-translucent",
+      statusBarStyle: "default",
     },
   };
 }

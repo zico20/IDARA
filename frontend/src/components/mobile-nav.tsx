@@ -41,9 +41,8 @@ export function MobileNav() {
 
   return (
     <div className="max-md:block md:hidden">
-      {/* Top strip with the hamburger trigger (below md only). pt-safe clears
-          the device status bar so the hamburger isn't under the clock. */}
-      <div className="glass-bar flex h-14 flex-shrink-0 items-center px-3 pt-safe">
+      {/* Top strip with the hamburger trigger (below md only). */}
+      <div className="glass-bar flex h-14 flex-shrink-0 items-center px-3">
         <button
           type="button"
           onClick={() => setOpen(true)}
