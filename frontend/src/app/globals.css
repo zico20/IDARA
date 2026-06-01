@@ -139,11 +139,16 @@ body {
    sitting flush against it. Requires viewport-fit=cover.
    ------------------------------------------------------------ */
 :root {
-  --safe-gap: 0.625rem; /* ~10px breathing room below the status bar */
+  /* Comfortable clearance below the system status bar (clock/signal/battery).
+     In a normal Safari tab env(safe-area-inset-top) is 0, so we fall back to a
+     solid minimum; in an installed/standalone PWA the real inset (~47px) wins.
+     `--safe-gap` is the extra breathing room added on top of that clearance. */
+  --safe-top: max(env(safe-area-inset-top), 2.75rem);
+  --safe-gap: 0.75rem;
 }
 .pt-safe {
   padding-top: calc(
-    max(var(--tw-safe-base-top, 0px), env(safe-area-inset-top)) + var(--safe-gap)
+    max(var(--tw-safe-base-top, 0px), var(--safe-top)) + var(--safe-gap)
   );
 }
 .pb-safe {
@@ -156,10 +161,10 @@ body {
 .pe-safe {
   padding-inline-end: env(safe-area-inset-right);
 }
-/* Convenience: top inset (plus the gap) as a margin, for absolutely- or
+/* Convenience: top clearance (plus the gap) as a margin, for absolutely- or
    sticky-positioned floating bars. */
 .mt-safe {
-  margin-top: calc(env(safe-area-inset-top) + var(--safe-gap));
+  margin-top: calc(var(--safe-top) + var(--safe-gap));
 }
 
 /* Hover effects only where a real pointer can hover — prevents sticky
