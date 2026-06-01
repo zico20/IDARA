@@ -15,10 +15,10 @@ describe("cn", () => {
 
 describe("initials", () => {
   it("takes first two words", () => {
-    expect(initials("Zain Mawla")).toBe("ZM");
+    expect(initials("Jane Doe")).toBe("JD");
   });
   it("handles single name", () => {
-    expect(initials("Zain")).toBe("Z");
+    expect(initials("Jane")).toBe("J");
   });
   it("trims and collapses whitespace", () => {
     expect(initials("  ada  lovelace ")).toBe("AL");

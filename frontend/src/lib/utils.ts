@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/** Initials from a display name, e.g. "Zain Mawla" -> "ZM". */
+/** Initials from a display name, e.g. "Jane Doe" -> "JD". */
 export function initials(name: string): string {
   return name
     .trim()

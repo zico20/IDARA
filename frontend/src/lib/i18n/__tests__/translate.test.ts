@@ -30,8 +30,8 @@ describe("translate", () => {
 
   it("interpolates {params}", () => {
     expect(translate("en", "boards.count", { count: 3 })).toBe("3 boards");
-    expect(translate("en", "activity.task.moved", { user: "Zain", title: "X", column: "Done" })).toBe(
-      "Zain moved 'X' to Done",
+    expect(translate("en", "activity.task.moved", { user: "Jane", title: "X", column: "Done" })).toBe(
+      "Jane moved 'X' to Done",
     );
   });
 

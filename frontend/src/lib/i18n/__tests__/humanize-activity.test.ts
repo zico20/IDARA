@@ -7,11 +7,11 @@ const tAr = createT("ar");
 
 describe("humanizeActivity", () => {
   it("builds task.created in both locales", () => {
-    expect(humanizeActivity("task.created", "Zain", { title: "Fix bug" }, tEn)).toBe(
-      "Zain created task 'Fix bug'",
+    expect(humanizeActivity("task.created", "Jane", { title: "Fix bug" }, tEn)).toBe(
+      "Jane created task 'Fix bug'",
     );
-    expect(humanizeActivity("task.created", "زين", { title: "إصلاح" }, tAr)).toBe(
-      "أنشأ زين المهمة 'إصلاح'",
+    expect(humanizeActivity("task.created", "سارة", { title: "إصلاح" }, tAr)).toBe(
+      "أنشأ سارة المهمة 'إصلاح'",
     );
   });
 

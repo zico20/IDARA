@@ -53,14 +53,24 @@ export default function SignupPage() {
       <p className="mb-5 text-sm text-fg-muted">{t("auth.signup.subtitle")}</p>
 
       {/* Social sign-up (presentational only — no real OAuth in this build). */}
-      <button
-        type="button"
-        onClick={() => toast(t("auth.googleUnavailable"))}
-        className="glass-clear flex h-10 w-full items-center justify-center gap-2.5 rounded-md text-sm font-medium text-fg transition-colors hover:brightness-[1.05] md:h-9"
-      >
-        <GoogleIcon />
-        {t("auth.google")}
-      </button>
+      <div className="space-y-2.5">
+        <button
+          type="button"
+          onClick={() => toast(t("auth.googleUnavailable"))}
+          className="glass-clear flex h-10 w-full items-center justify-center gap-2.5 rounded-md text-sm font-medium text-fg transition-colors hover:brightness-[1.05] md:h-9"
+        >
+          <GoogleIcon />
+          {t("auth.google")}
+        </button>
+        <button
+          type="button"
+          onClick={() => toast(t("auth.appleUnavailable"))}
+          className="glass-clear flex h-10 w-full items-center justify-center gap-2.5 rounded-md text-sm font-medium text-fg transition-colors hover:brightness-[1.05] md:h-9"
+        >
+          <AppleIcon />
+          {t("auth.apple")}
+        </button>
+      </div>
 
       <div className="my-4 flex items-center gap-3">
         <span className="h-px flex-1 bg-border" />
@@ -162,6 +172,22 @@ function GoogleIcon() {
         fill="#EA4335"
         d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.47.89 11.43 0 9 0A9 9 0 0 0 .96 4.94l3.01 2.34C4.68 5.16 6.66 3.58 9 3.58Z"
       />
+    </svg>
+  );
+}
+
+/** The Apple mark. Uses currentColor so it reads in both light and dark. */
+function AppleIcon() {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      aria-hidden
+      focusable="false"
+    >
+      <path d="M11.18 8.46c-.02-1.66 1.36-2.46 1.42-2.5-.77-1.13-1.98-1.29-2.41-1.3-1.03-.1-2 .6-2.52.6-.51 0-1.31-.58-2.16-.57-1.11.02-2.13.64-2.7 1.63-1.15 2-.3 4.96.83 6.58.55.79 1.21 1.68 2.07 1.65.83-.03 1.15-.54 2.15-.54 1 0 1.29.54 2.16.52.89-.01 1.46-.81 2.01-1.6.63-.92.89-1.81.9-1.86-.02-.01-1.73-.66-1.75-2.62ZM9.5 3.6c.46-.56.77-1.33.68-2.1-.66.03-1.46.44-1.93 1-.42.49-.79 1.28-.69 2.03.73.06 1.48-.37 1.94-.93Z" />
     </svg>
   );
 }
