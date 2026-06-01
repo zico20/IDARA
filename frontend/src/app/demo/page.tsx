@@ -41,8 +41,8 @@ export default function DemoPage() {
         </div>
       </header>
 
-      {/* Trial banner */}
-      <div className="border-b border-accent/30 bg-accent/10">
+      {/* Trial banner — desktop only; hidden on mobile (<md) to save space. */}
+      <div className="border-b border-accent/30 bg-accent/10 max-md:hidden">
         <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-2.5 text-sm">
           <Info size={16} className="shrink-0 text-accent" />
           <span className="text-fg-muted">{t("demo.banner")}</span>
