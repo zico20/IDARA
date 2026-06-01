@@ -151,7 +151,7 @@ export function DemoBoard() {
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
     >
-      <div className="flex gap-4 overflow-x-auto pb-4">
+      <div className="flex gap-4 pb-4 max-md:flex-col max-md:overflow-y-auto md:flex-row md:items-start md:overflow-x-auto">
         {columns.map((column) => (
           <DemoColumn
             key={column.id}
@@ -207,7 +207,7 @@ function DemoColumn({
   });
 
   return (
-    <div className="flex w-72 shrink-0 flex-col">
+    <div className="flex shrink-0 flex-col max-md:w-full md:w-72">
       <div className="mb-2 flex items-center gap-2 px-1">
         <h3 className="text-sm font-semibold text-fg">{column.name}</h3>
         <span className="rounded-full bg-bg-muted px-1.5 text-xs text-fg-subtle">
