@@ -67,7 +67,7 @@ export function LandingPage() {
       </header>
 
       {/* Hero */}
-      <section className="relative z-10 mx-auto max-w-6xl px-4 pb-12 pt-16 text-center sm:pt-24">
+      <section className="relative z-10 mx-auto max-w-6xl px-4 pb-12 pt-8 text-center sm:pt-12">
         <div className="animate-fade-in">
           <span className="glass-clear inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs text-fg-muted">
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
