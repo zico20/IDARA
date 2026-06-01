@@ -200,7 +200,7 @@ export default function BoardPage() {
       {/* Toolbar row: search + view switcher + presence */}
       <div className="flex flex-shrink-0 items-center gap-3 px-4 pt-4 sm:px-6 sm:pt-5">
         {boardView === "board" && (
-          <div className="relative min-w-0 flex-1 sm:flex-none">
+          <div className="relative min-w-0 max-sm:flex-1 sm:flex-none">
             <Search
               size={14}
               className="pointer-events-none absolute start-2.5 top-1/2 -translate-y-1/2 text-fg-subtle"
@@ -210,7 +210,7 @@ export default function BoardPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={t("board.search")}
-              className="w-full ps-8 sm:w-56"
+              className="ps-8 max-sm:w-full sm:w-56"
             />
           </div>
         )}

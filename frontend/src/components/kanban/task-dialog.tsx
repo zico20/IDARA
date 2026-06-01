@@ -175,7 +175,9 @@ export function TaskDialog({
         )}
       </DialogHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid md:grid-cols-[1fr_240px]">
+        {/* Mobile: single column (stacked). Desktop: main + 240px properties
+            sidebar. Scoped per-side so neither layout leaks into the other. */}
+        <div className="grid max-md:grid-cols-1 md:grid-cols-[1fr_240px]">
           {/* Main column: title + description */}
           <div className="space-y-4 p-5">
             <div>
@@ -206,8 +208,9 @@ export function TaskDialog({
             </div>
           </div>
 
-          {/* Side column: properties */}
-          <div className="space-y-4 border-t border-border/70 bg-bg/30 p-5 md:border-s md:border-t-0">
+          {/* Side column: properties. Divider is scoped per-side — mobile gets a
+              top border (sections stack), desktop gets a start/left border. */}
+          <div className="space-y-4 border-border/70 bg-bg/30 p-5 max-md:border-t md:border-s">
             <div>
               <Label htmlFor="priority">{t("task.priority")}</Label>
               <Select

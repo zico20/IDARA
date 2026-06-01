@@ -182,9 +182,11 @@ export function KanbanBoard({
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
     >
-      {/* Desktop/tablet: horizontal kanban (unchanged). Mobile (<768px): stack
-          columns vertically so the board scrolls down, not sideways. */}
-      <div className="flex h-full flex-col gap-4 overflow-y-auto pb-4 md:flex-row md:items-start md:overflow-x-auto md:overflow-y-hidden">
+      {/* Mobile (<md) and desktop (>=md) layouts are fully separated: every
+          layout-critical property is scoped to exactly one side (max-md: vs md:)
+          so editing one never affects the other. Mobile: vertical stack that
+          scrolls down. Desktop: horizontal board that scrolls sideways. */}
+      <div className="flex h-full gap-4 pb-4 max-md:flex-col max-md:overflow-y-auto md:flex-row md:items-start md:overflow-x-auto md:overflow-y-hidden">
         {columns.map((column) => (
           <KanbanColumn
             key={column.id}
@@ -201,7 +203,7 @@ export function KanbanBoard({
         ))}
 
         {canEdit && (
-          <div className="w-full shrink-0 md:w-72">
+          <div className="shrink-0 max-md:w-full md:w-72">
             <Button
               variant="secondary"
               className="w-full justify-start"

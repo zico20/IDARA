@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils";
  */
 export function Sidebar() {
   return (
-    <aside className="glass-frost relative z-10 hidden h-screen w-[var(--sidebar-w)] flex-shrink-0 flex-col gap-1 border-e border-border/60 p-3 md:flex">
+    <aside className="glass-frost relative z-10 h-screen w-[var(--sidebar-w)] flex-shrink-0 flex-col gap-1 border-e border-border/60 p-3 max-md:hidden md:flex">
       <SidebarContent />
     </aside>
   );
