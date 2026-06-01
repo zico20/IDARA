@@ -128,6 +128,32 @@ body {
   }
 }
 
+/* ------------------------------------------------------------
+   SAFE-AREA UTILITIES (edge-to-edge / notch & home-indicator)
+   Add the device safe-area inset ON TOP of any existing padding
+   so interactive chrome clears the clock/notch while the page
+   background still reaches the physical edge. On devices/desktop
+   with no inset, env(...) is 0 — these are no-ops there.
+   Requires viewport-fit=cover (set in app/layout.tsx).
+   ------------------------------------------------------------ */
+.pt-safe {
+  padding-top: max(var(--tw-safe-base-top, 0px), env(safe-area-inset-top));
+}
+.pb-safe {
+  padding-bottom: max(var(--tw-safe-base-bottom, 0px), env(safe-area-inset-bottom));
+}
+/* Logical horizontal insets (RTL/LTR aware). */
+.ps-safe {
+  padding-inline-start: env(safe-area-inset-left);
+}
+.pe-safe {
+  padding-inline-end: env(safe-area-inset-right);
+}
+/* Convenience: top inset as a margin (for absolutely-positioned bars). */
+.mt-safe {
+  margin-top: env(safe-area-inset-top);
+}
+
 /* Hover effects only where a real pointer can hover — prevents sticky
    hover states on touch devices. Non-hover (focus/active) feedback still
    applies everywhere. */

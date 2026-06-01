@@ -166,6 +166,33 @@ library). The pieces:
 - **Reduced motion / transparency** — the global `globals.css` media blocks neutralize
   all of the above automatically; the settled desktop (≥1280px) view is unchanged.
 
+## PWA & edge-to-edge
+
+The frontend is an installable PWA, built on Next's native primitives (no `next-pwa`):
+
+- **Installable** — `app/manifest.ts` (served at `/manifest.webmanifest`, auto-linked) sets
+  name/short_name, `start_url: /boards`, `display: standalone`, and brand background/theme
+  colors. The app icon is a static `public/icon.svg` (full-bleed gradient grid mark, usable
+  as `any` + `maskable`), referenced by the manifest and by `metadata.icons` (favicon +
+  apple-touch). Apple standalone hints come from `metadata.appleWebApp`.
+- **Edge-to-edge** — the root `viewport` sets `viewportFit: "cover"` and a per-color-scheme
+  `themeColor` (dark `#0D1117`, light `#EAEEF4`, from the `--bg` tokens) so the mobile
+  status-bar area blends with the page instead of showing a black strip. Mobile chrome uses
+  `env(safe-area-inset-*)` utilities (`.pt-safe`/`.pb-safe`/`.ps-safe`/`.pe-safe`/`.mt-safe`
+  in `globals.css`, `max-md:`-scoped) so the background reaches the edges while controls
+  clear the notch/clock. The app shell uses `h-[100dvh]` (dynamic viewport) so the mobile
+  address bar showing/hiding never clips content. Desktop is unaffected.
+- **Offline / resilience** — a small hand-written `public/sw.js` (registered only in
+  production by `components/pwa/service-worker-registrar.tsx`, decision logic in the
+  Vitest-tested `lib/pwa/sw-register.ts`) precaches the app shell + `/offline` and serves
+  static assets cache-first, navigations network-first (falling back to `/offline`). It
+  **never** caches `/api/*`, non-GET, cross-origin, or auth — REST stays the source of
+  truth, so offline never shows stale data as current. A versioned cache + `skipWaiting`/
+  `clients.claim` + a one-time reload on `controllerchange` prevents stale-shell lock-in.
+- **Boundaries** — `app/error.tsx`, `app/global-error.tsx` (self-contained, bilingual),
+  `app/not-found.tsx`, and the `/offline` page reuse `EmptyState` + glass, are bilingual
+  (AR فصحى/EN, parity-tested), mirror in RTL, and mark messages `role="alert"`.
+
 ## Scaling path: in-memory → Redis Pub/Sub
 
 v1 broadcasting is **in-process**, which is correct for a single backend instance. To

@@ -357,6 +357,18 @@ export const en = {
   // --- Top bar / presence ---
   "presence.live": "Live",
   "presence.disconnected": "Disconnected",
+
+  // --- Offline / error / not-found ---
+  "offline.title": "You're offline",
+  "offline.desc":
+    "We can't reach the network right now. Check your connection and try again.",
+  "offline.retry": "Retry",
+  "error.title": "Something went wrong",
+  "error.desc": "An unexpected error occurred. You can try again.",
+  "error.retry": "Try again",
+  "notFound.title": "Page not found",
+  "notFound.desc": "The page you're looking for doesn't exist or was moved.",
+  "notFound.back": "Back to boards",
 } as const;
 
 // The dictionary shape is fixed by `en`. `ar` MUST provide exactly these keys.
@@ -711,6 +723,18 @@ export const ar: Dictionary = {
   // --- Top bar / presence ---
   "presence.live": "متصل",
   "presence.disconnected": "غير متصل",
+
+  // --- Offline / error / not-found ---
+  "offline.title": "أنت غير متصل بالإنترنت",
+  "offline.desc":
+    "تعذّر الوصول إلى الشبكة حالياً. تحقّق من اتصالك ثم حاول مرة أخرى.",
+  "offline.retry": "إعادة المحاولة",
+  "error.title": "حدث خطأ ما",
+  "error.desc": "وقع خطأ غير متوقّع. يمكنك المحاولة مرة أخرى.",
+  "error.retry": "حاول مرة أخرى",
+  "notFound.title": "الصفحة غير موجودة",
+  "notFound.desc": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+  "notFound.back": "العودة إلى اللوحات",
 };
 
 export const dictionaries: Record<"en" | "ar", Dictionary> = { en, ar };

@@ -30,8 +30,10 @@ export default function AppLayout({
   if (isLoading) return <FullPageSpinner />;
   if (!user) return <FullPageSpinner />;
 
+  // 100dvh (dynamic viewport) so the mobile address bar showing/hiding never
+  // clips the bottom of the app. Equals 100vh on desktop (no dynamic chrome).
   return (
-    <div className="relative flex h-screen overflow-hidden">
+    <div className="relative flex h-[100dvh] overflow-hidden">
       <Backdrop />
       <Sidebar />
       <div className="relative z-10 flex min-w-0 flex-1 flex-col overflow-hidden">
