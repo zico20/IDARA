@@ -36,15 +36,26 @@ export default function AuthLayout({
           <LanguageSwitcher iconOnly />
         </div>
       </div>
-      <div className="relative z-10 w-full max-w-sm animate-fade-in">
-        <Link href="/" className="mb-8 flex flex-col items-center text-center">
-          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent-subtle text-bg shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
-            <LayoutGrid size={22} />
+      {/* Mobile (<md): brand stacked above the card, centered. Desktop (>=md):
+          brand to one side and the card to the other (two columns) so the card
+          gets its own breathing room. Direction follows RTL/LTR automatically. */}
+      <div className="relative z-10 flex w-full max-w-sm animate-fade-in flex-col items-stretch gap-8 md:max-w-4xl md:flex-row md:items-center md:justify-center md:gap-16">
+        <Link
+          href="/"
+          className="flex flex-col items-center text-center md:flex-1 md:items-start md:text-start"
+        >
+          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent-subtle text-bg shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] md:h-16 md:w-16">
+            <LayoutGrid size={22} className="md:hidden" />
+            <LayoutGrid size={30} className="max-md:hidden" />
           </div>
-          <h1 className="text-xl font-semibold tracking-tight text-fg">{t("common.appName")}</h1>
-          <p className="mt-1 text-sm text-fg-muted">{t("common.tagline")}</p>
+          <h1 className="text-xl font-semibold tracking-tight text-fg md:text-4xl">
+            {t("common.appName")}
+          </h1>
+          <p className="mt-1 text-sm text-fg-muted md:mt-2 md:text-base">
+            {t("common.tagline")}
+          </p>
         </Link>
-        {children}
+        <div className="w-full md:max-w-sm md:flex-1">{children}</div>
       </div>
     </div>
   );
