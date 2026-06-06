@@ -33,3 +33,11 @@ Thumbs.db
 
 # --- Docker ---
 *.pid
+
+# --- Local-only: spec/docs/tooling (kept on disk, not pushed) ---
+# These stay local; only code needed to run the app is published.
+specs/
+.specify/
+.claude/
+docs/
+CLAUDE.md
